@@ -1,18 +1,16 @@
 {
-  "name": "StudyForge - 学习引擎",
+  "name": "StudyForge v2 - 学习引擎",
   "short_name": "StudyForge",
-  "description": "专升本·考研一站式学习规划与打卡工具",
+  "description": "专升本·考研一站式学习规划、题库、打卡工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0a1a",
-  "theme_color": "#1a1a2e",
+  "theme_color": "#0a0a1a",
   "orientation": "portrait",
-  "icons": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%231a1a2e'/><text x='256' y='350' font-size='300' text-anchor='middle'>🔥</text></svg>",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "icons": [{
+    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%230a0a1a'/><text x='256' y='350' font-size='300' text-anchor='middle'>🔥</text></svg>",
+    "sizes": "512x512",
+    "type": "image/svg+xml",
+    "purpose": "any maskable"
+  }]
 }
