@@ -278,7 +278,7 @@ const D={get(k,v){try{return JSON.parse(localStorage.getItem('sf_'+k))||v}catch{
 let S={
   prof:D.get('prof',{name:'',stage:'zsb',target:'hfut',daily:180}),
   cins:D.get('cins',{}),stk:D.get('stk',0),tMin:D.get('tMin',0),tDone:D.get('tDone',0),
-  words:D.get('words',[]),wordR:D.get('wordR',{}),cust:D.get('cust',[]),dk:D.get('dk',''),
+  words:D.get('words',[]),wordR:D.get('wordR',{}),cust:D.get('cust',[]),dk:D.get('dk','')||'sk-605d92b33f3f4a9ba3a00393eb48ac1a',
   ts:D.get('ts',{}),pp:D.get('pp',{}),errs:D.get('errs',[]),quizS:D.get('quizS',{math:0,eng:0,cs:0,pol:0}),
   tRun:false,tSec:0,tIv:null,qTab:'math',rTab:'vid',qIdx:0,qAns:false,
 };
