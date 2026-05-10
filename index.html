@@ -155,6 +155,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 
 /* Responsive */
 @media(max-width:400px){.timer-d{font-size:2.2em}.chat-box{width:calc(100vw - 24px)}}
+
+/* DeepSeek streaming */
+.cmsg.ai.streaming::after{content:'▊';animation:blink .8s infinite;color:var(--pl)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.chat-loading{display:flex;gap:4px;padding:9px 12px;align-self:flex-start}
+.chat-loading span{width:8px;height:8px;border-radius:50%;background:var(--pl);animation:loadDot 1.2s infinite}
+.chat-loading span:nth-child(2){animation-delay:.2s}.chat-loading span:nth-child(3){animation-delay:.4s}
+@keyframes loadDot{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
@@ -232,6 +240,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
       </div>
       <div class="card"><div class="card-t">📊 学习统计</div><div id="pStats"></div></div>
       <div class="card"><div class="card-t">🧠 AI智能分析</div><div id="aiAnalysis"></div></div>
+      <div class="card"><div class="card-t">🤖 DeepSeek AI 设置</div>
+        <div class="fg"><label class="fl">DeepSeek API Key</label><input class="fi" id="dsKey" type="password" placeholder="sk-..." onchange="saveDsKey()"></div>
+        <div style="font-size:.78em;color:var(--tx3);margin-top:-8px;margin-bottom:8px">🔑 填入后聊天助手将使用 DeepSeek 大模型回答 · Key 仅存储在本地浏览器</div>
+        <div id="dsStatus" style="font-size:.82em;margin-top:4px"></div>
+      </div>
       <div class="card"><div class="card-t">⚙️ 数据管理</div>
         <button class="fb" style="margin-bottom:8px;background:var(--pg)" onclick="expData()">📤 导出数据</button>
         <button class="fb" style="background:var(--pr)" onclick="if(confirm('确定清除所有数据？不可恢复！')){localStorage.clear();location.reload()}">🗑️ 清除所有数据</button>
@@ -265,14 +278,14 @@ const D={get(k,v){try{return JSON.parse(localStorage.getItem('sf_'+k))||v}catch{
 let S={
   prof:D.get('prof',{name:'',stage:'zsb',target:'hfut',daily:180}),
   cins:D.get('cins',{}),stk:D.get('stk',0),tMin:D.get('tMin',0),tDone:D.get('tDone',0),
-  words:D.get('words',[]),wordR:D.get('wordR',{}),cust:D.get('cust',[]),
+  words:D.get('words',[]),wordR:D.get('wordR',{}),cust:D.get('cust',[]),dk:D.get('dk',''),
   ts:D.get('ts',{}),pp:D.get('pp',{}),errs:D.get('errs',[]),quizS:D.get('quizS',{math:0,eng:0,cs:0,pol:0}),
   tRun:false,tSec:0,tIv:null,qTab:'math',rTab:'vid',qIdx:0,qAns:false,
 };
 function save(){
   D.set('prof',S.prof);D.set('cins',S.cins);D.set('stk',S.stk);D.set('tMin',S.tMin);
   D.set('tDone',S.tDone);D.set('words',S.words);D.set('wordR',S.wordR);
-  D.set('cust',S.cust);D.set('ts',S.ts);D.set('pp',S.pp);D.set('errs',S.errs);D.set('quizS',S.quizS);
+  D.set('cust',S.cust);D.set('ts',S.ts);D.set('pp',S.pp);D.set('errs',S.errs);D.set('quizS',S.quizS);D.set('dk',S.dk);
 }
 function td(){return new Date().toISOString().split('T')[0]}
 function $(id){return document.getElementById(id)}
@@ -759,19 +772,132 @@ function rProf(){
     else quizAdv=`<div style="color:var(--grn);margin-top:6px">✅ 各科做题表现不错！</div>`;
   }
   $('aiAnalysis').innerHTML=`<div style="font-size:.88em;line-height:1.6"><div style="margin-bottom:8px">🎯 目标：<strong>${tgt}</strong> · 距考试 <strong>${daysLeft()}</strong> 天</div><div>${adv}</div>${quizAdv}<div style="margin-top:12px;font-size:.82em;color:var(--tx3)">💡 基于你的学习数据自动分析</div></div>`;
+  $('dsKey').value=S.dk||'';rDsStatus();
 }
 function saveProf(){S.prof.name=$('pName').value;S.prof.stage=$('pStage').value;S.prof.target=$('pTgt').value;S.prof.daily=parseInt($('pDaily').value)||180;save();rTasks();rCountdown()}
+function saveDsKey(){S.dk=$('dsKey').value.trim();save();rDsStatus();toast(S.dk?'✅ DeepSeek Key 已保存':'🔑 Key 已清除')}
+function rDsStatus(){const el=$('dsStatus');if(S.dk){el.innerHTML='<span style="color:var(--grn)">✅ 已接入 DeepSeek · 聊天将使用 AI 大模型</span>'}else{el.innerHTML='<span style="color:var(--tx3)">⚠️ 未设置 Key · 聊天使用内置规则回复</span>'}}
 function expData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='studyforge_'+td()+'.json';a.click();toast('数据已导出')}
 
 // ---- AI Chat ----
 function rSug(){}
 function askChip(q){$('chatIn').value=q;sendMsg()}
 
-function sendMsg(){
+function buildSystemPrompt(){
+  const dl=daysLeft(),stage=S.prof.stage,tgt={hfut:'合工大',njnu:'南大',sjtu:'上交',whu:'武大'}[S.prof.target]||'合工大';
+  const ci=Object.keys(S.cins).length,avgMin=ci>0?(S.tMin/ci).toFixed(0):0;
+  const errSubs=[...new Set(S.errs.map(e=>({math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[e.sub])))];
+  const weak=Object.entries(S.quizS).filter(([,v])=>v<3).map(([k])=>({math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[k]));
+  let ctx=`你是StudyForge AI学习助手，专为专升本/考研学生服务。用中文回答，简洁实用，鼓励为主。\n\n用户信息：\n- 备考阶段：${stage==='zsb'?'专升本':'考研'}\n- 目标院校：${tgt}\n- 距考试：${dl}天\n- 累计打卡：${ci}天\n- 日均学习：${avgMin}分钟\n- 累计学习：${(S.tMin/60).toFixed(1)}小时\n- 完成任务：${S.tDone}个\n- 背单词：${S.words.length}个\n- 错题数：${S.errs.length}`;
+  if(weak.length)ctx+=`\n- 薄弱科目：${weak.join('、')}`;
+  if(errSubs.length)ctx+=`\n- 错题集中：${errSubs.join('、')}`;
+  ctx+=`\n\n回答要求：\n- 用HTML格式（<b>加粗、<br>换行），不要用markdown\n- 保持简洁，200字以内\n- 结合用户实际数据给出个性化建议\n- 鼓励为主，但要务实`;
+  return ctx;
+}
+
+function escapeHtml(text){const d=document.createElement('div');d.textContent=text;return d.innerHTML}
+
+function formatAIResponse(text){
+  // Convert markdown-like formatting to HTML
+  let r=text;
+  r=r.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+  r=r.replace(/\*(.*?)\*/g,'<i>$1</i>');
+  r=r.replace(/`(.*?)`/g,'<code style="background:var(--bg);padding:1px 4px;border-radius:3px;font-size:.85em">$1</code>');
+  r=r.replace(/\n/g,'<br>');
+  return r;
+}
+
+async function sendMsg(){
   const inp=$('chatIn'),msg=inp.value.trim();if(!msg)return
-  const box=$('chatMsgs');box.innerHTML+=`<div class="cmsg me">${esc(msg)}</div>`;inp.value='';
-  let r=genAI(msg);
-  setTimeout(()=>{box.innerHTML+=`<div class="cmsg ai">${r}</div>`;box.scrollTop=box.scrollHeight},300);
+  const box=$('chatMsgs');
+  box.innerHTML+=`<div class="cmsg me">${esc(msg)}</div>`;inp.value='';
+  box.scrollTop=box.scrollHeight;
+
+  if(S.dk){
+    // Use DeepSeek API with streaming
+    await sendDeepSeek(msg,box);
+  }else{
+    // Fallback to local genAI
+    let r=genAI(msg);
+    setTimeout(()=>{box.innerHTML+=`<div class="cmsg ai">${r}</div>`;box.scrollTop=box.scrollHeight},300);
+    box.scrollTop=box.scrollHeight;
+  }
+}
+
+async function sendDeepSeek(msg,box){
+  // Show loading dots
+  const loadId='ld_'+Date.now();
+  box.innerHTML+=`<div class="chat-loading" id="${loadId}"><span></span><span></span><span></span></div>`;
+  box.scrollTop=box.scrollHeight;
+
+  const sysPrompt=buildSystemPrompt();
+  // Build conversation history (last 10 messages)
+  const msgs=[{role:'system',content:sysPrompt}];
+  const allMsgs=box.querySelectorAll('.cmsg');
+  const recentMsgs=Array.from(allMsgs).slice(-10);
+  recentMsgs.forEach(m=>{
+    if(m.classList.contains('me'))msgs.push({role:'user',content:m.textContent});
+    else if(m.classList.contains('ai'))msgs.push({role:'assistant',content:m.textContent});
+  });
+  // Add current user message
+  msgs.push({role:'user',content:msg});
+
+  try{
+    const resp=await fetch('https://api.deepseek.com/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${S.dk}`},
+      body:JSON.stringify({model:'deepseek-chat',messages:msgs,stream:true,max_tokens:800,temperature:0.7})
+    });
+
+    if(!resp.ok){
+      const err=await resp.text();
+      throw new Error(`API错误 ${resp.status}: ${err.substring(0,200)}`);
+    }
+
+    // Remove loading dots
+    const ld=document.getElementById(loadId);if(ld)ld.remove();
+
+    // Create streaming message element
+    const msgDiv=document.createElement('div');
+    msgDiv.className='cmsg ai streaming';
+    box.appendChild(msgDiv);
+
+    const reader=resp.body.getReader();
+    const decoder=new TextDecoder();
+    let fullText='';
+    let buffer='';
+
+    while(true){
+      const{done,value}=await reader.read();
+      if(done)break;
+      buffer+=decoder.decode(value,{stream:true});
+      const lines=buffer.split('\n');
+      buffer=lines.pop()||'';
+
+      for(const line of lines){
+        const trimmed=line.trim();
+        if(!trimmed||!trimmed.startsWith('data:'))continue;
+        const data=trimmed.slice(5).trim();
+        if(data==='[DONE]')continue;
+        try{
+          const json=JSON.parse(data);
+          const delta=json.choices&&json.choices[0]&&json.choices[0].delta;
+          if(delta&&delta.content){
+            fullText+=delta.content;
+            msgDiv.innerHTML=formatAIResponse(fullText);
+            box.scrollTop=box.scrollHeight;
+          }
+        }catch(e){}
+      }
+    }
+
+    msgDiv.classList.remove('streaming');
+    if(!fullText)msgDiv.innerHTML='<span style="color:var(--tx3)">（AI未返回内容）</span>';
+
+  }catch(e){
+    const ld=document.getElementById(loadId);if(ld)ld.remove();
+    box.innerHTML+=`<div class="cmsg ai" style="color:var(--pr)">❌ ${esc(e.message)}<br><br><span style="font-size:.82em">请检查API Key是否正确，或使用内置助手（不填Key即可）</span></div>`;
+  }
   box.scrollTop=box.scrollHeight;
 }
 
