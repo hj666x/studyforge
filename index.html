@@ -2,95 +2,50 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a1a">
-<title>StudyForge - 专升本·考研学习引擎</title>
+<title>StudyForge v2 - 学习引擎</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0a0a1a;--bg2:#111128;--bg3:#1a1a3e;--card:#151535;--card-h:#1c1c48;
-  --p:#6c5ce7;--pl:#a29bfe;--pk:#fd79a8;--pg:#00cec9;--py:#fdcb6e;--pr:#e17055;
-  --grn:#00b894;--txt:#e8e8f0;--tx2:#9898c0;--tx3:#5858a0;--bdr:#252560;
-  --r:14px;--rs:10px;
-}
+:root{--bg:#0a0a1a;--bg2:#111128;--bg3:#1a1a3e;--card:#151535;--p:#6c5ce7;--pl:#a29bfe;--pk:#fd79a8;--pg:#00cec9;--py:#fdcb6e;--pr:#e17055;--grn:#00b894;--txt:#e8e8f0;--tx2:#9898c0;--tx3:#5858a0;--bdr:#252560;--r:14px;--rs:10px}
 html,body{height:100%;overflow:hidden}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
-  background:var(--bg);color:var(--txt);
-}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--txt)}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
-
-/* === APP SHELL === */
 .app{display:flex;flex-direction:column;height:100vh;height:100dvh}
-
-/* Topbar */
-.topbar{
-  background:linear-gradient(135deg,var(--bg2),var(--bg3));
-  padding:10px 16px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:50;
-}
+.topbar{background:linear-gradient(135deg,var(--bg2),var(--bg3));padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:50}
 .logo{font-size:1.2em;font-weight:800;background:linear-gradient(135deg,var(--pl),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .streak{display:flex;align-items:center;gap:5px;background:rgba(253,203,110,.12);padding:3px 10px;border-radius:16px;font-size:.8em;color:var(--py)}
-
-/* Main scrollable area */
 .main{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px 14px 90px;max-width:680px;margin:0 auto;width:100%}
-
-/* === COMPONENTS === */
 .card{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:12px;border:1px solid var(--bdr);transition:.2s}
 .card:hover{border-color:var(--p)}
 .card-t{font-size:1.05em;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:7px}
-
-/* Stats grid */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
 .stat{background:var(--card);border-radius:var(--rs);padding:14px;text-align:center;border:1px solid var(--bdr)}
 .stat-v{font-size:1.7em;font-weight:800;background:linear-gradient(135deg,var(--pl),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stat-l{font-size:.75em;color:var(--tx3);margin-top:3px}
-
-/* Checkin */
-.checkin{
-  text-align:center;padding:24px 16px;
-  background:linear-gradient(135deg,rgba(108,92,231,.08),rgba(253,121,168,.08));
-  border-radius:var(--r);border:1px dashed var(--p);margin-bottom:12px;
-}
-.cbtn{
-  background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;border:none;
-  padding:12px 36px;border-radius:28px;font-size:1.05em;font-weight:700;
-  cursor:pointer;transition:.3s;box-shadow:0 4px 18px rgba(108,92,231,.35);
-}
-.cbtn:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(108,92,231,.5)}
-.cbtn:disabled{opacity:.4;cursor:default;transform:none}
-.cbtn.done{background:var(--grn);box-shadow:0 4px 18px rgba(0,184,148,.35)}
-
-/* Tasks */
-.task{
-  display:flex;align-items:center;gap:10px;padding:10px 12px;
-  border-radius:var(--rs);background:var(--bg2);margin-bottom:6px;cursor:pointer;transition:.15s;
-}
+.checkin{text-align:center;padding:24px 16px;background:linear-gradient(135deg,rgba(108,92,231,.08),rgba(253,121,168,.08));border-radius:var(--r);border:1px dashed var(--p);margin-bottom:12px}
+.cbtn{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;border:none;padding:12px 36px;border-radius:28px;font-size:1.05em;font-weight:700;cursor:pointer;transition:.3s;box-shadow:0 4px 18px rgba(108,92,231,.35)}
+.cbtn:hover{transform:scale(1.04)}.cbtn:disabled{opacity:.4;cursor:default;transform:none}.cbtn.done{background:var(--grn);box-shadow:0 4px 18px rgba(0,184,148,.35)}
+.task{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--rs);background:var(--bg2);margin-bottom:6px;cursor:pointer;transition:.15s}
 .task:hover{background:var(--bg3)}.task.done{opacity:.45}.task.done .task-txt{text-decoration:line-through}
-.task-ck{
-  width:22px;height:22px;border-radius:50%;border:2px solid var(--bdr);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;transition:.25s;
-}
-.task.done .task-ck{background:var(--grn);border-color:var(--grn)}
-.task.done .task-ck::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
-.task-txt{flex:1;font-size:.9em}.task-tm{font-size:.75em;color:var(--tx3)}
-
-/* Progress bar */
+.task-ck{width:22px;height:22px;border-radius:50%;border:2px solid var(--bdr);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.25s}
+.task.done .task-ck{background:var(--grn);border-color:var(--grn)}.task.done .task-ck::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.task-txt{flex:1;font-size:.9em}.task-tm{font-size:.75em;color:var(--tx3)}.task-sub{font-size:.65em;padding:2px 6px;border-radius:6px;margin-left:4px}
+.task-sub.math{background:rgba(253,121,168,.15);color:var(--pk)}.task-sub.eng{background:rgba(0,206,201,.15);color:var(--pg)}.task-sub.cs{background:rgba(253,203,110,.15);color:var(--py)}.task-sub.pol{background:rgba(225,112,85,.15);color:var(--pr)}
 .pbar{width:100%;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin:6px 0}
 .pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--p),var(--pk));transition:width .6s ease}
-
-/* Resource card */
+.itabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch}
+.itab{padding:5px 14px;border-radius:18px;background:var(--bg3);color:var(--tx2);font-size:.82em;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid transparent;transition:.2s;flex-shrink:0}
+.itab.on{background:rgba(108,92,231,.18);color:var(--pl);border-color:var(--p)}
 .res{display:flex;gap:10px;padding:12px;background:var(--bg2);border-radius:var(--rs);margin-bottom:6px;cursor:pointer;transition:.2s;border:1px solid transparent}
 .res:hover{border-color:var(--p);background:var(--bg3)}
 .res-ic{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
 .res-i{flex:1}.res-t{font-weight:600;font-size:.9em;margin-bottom:2px}.res-d{font-size:.78em;color:var(--tx2)}
 .res-tag{font-size:.68em;padding:2px 7px;border-radius:8px;background:rgba(108,92,231,.12);color:var(--pl);margin-top:3px;display:inline-block}
-
-/* University card */
 .uni{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:10px;border:1px solid var(--bdr);transition:.2s}
 .uni:hover{border-color:var(--pg)}
 .uni-n{font-size:1.05em;font-weight:700;margin-bottom:3px}
@@ -100,131 +55,22 @@ body{
 .uni-lnk{display:flex;flex-wrap:wrap;gap:8px}
 .uni-lnk a{font-size:.82em;color:var(--pg);text-decoration:none;display:flex;align-items:center;gap:3px}
 .uni-lnk a:hover{text-decoration:underline}
-
-/* Timer */
 .timer-d{font-size:2.8em;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;background:linear-gradient(135deg,var(--pl),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:16px 0}
 .timer-c{display:flex;gap:10px;justify-content:center}
 .tbtn{padding:9px 24px;border-radius:22px;border:none;font-weight:700;font-size:.9em;cursor:pointer;transition:.25s}
 .tbtn.go{background:var(--grn);color:#fff}.tbtn.st{background:var(--pr);color:#fff}.tbtn.rs{background:var(--bg3);color:var(--tx2);border:1px solid var(--bdr)}
-
-/* Word card */
-.wcard{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:10px;text-align:center;border:1px solid var(--bdr)}
-.w-en{font-size:1.7em;font-weight:800;color:var(--pl);margin-bottom:3px}
-.w-ph{font-size:.85em;color:var(--tx3);margin-bottom:6px}
-.w-cn{font-size:1.05em;margin-bottom:10px}
-.w-acts{display:flex;gap:10px;justify-content:center}
-.wbtn{padding:7px 18px;border-radius:18px;border:1px solid var(--bdr);background:var(--bg2);color:var(--tx2);cursor:pointer;font-size:.82em;transition:.2s}
-.wbtn:hover{border-color:var(--p);color:var(--pl)}.wbtn.know{border-color:var(--grn);color:var(--grn)}
-.wbtn.know:hover{background:rgba(0,184,148,.12)}
-
-/* Book item */
-.book{display:flex;gap:10px;padding:12px;background:var(--bg2);border-radius:var(--rs);margin-bottom:6px;align-items:center}
-.book-cv{width:40px;height:54px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.3em;flex-shrink:0}
-.book-i{flex:1}.book-t{font-weight:600;font-size:.9em;margin-bottom:2px}.book-d{font-size:.78em;color:var(--tx2)}
-
-/* Quote */
-.quote{
-  background:linear-gradient(135deg,rgba(108,92,231,.1),rgba(253,121,168,.1));
-  border-radius:var(--r);padding:16px;text-align:center;margin-bottom:12px;border:1px solid rgba(108,92,231,.15);
-}
-.quote-t{font-size:.95em;font-style:italic;line-height:1.6}.quote-a{font-size:.78em;color:var(--tx3);margin-top:6px}
-
-/* Calendar */
-.cal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.cal-n{background:none;border:none;color:var(--tx2);cursor:pointer;font-size:1.1em;padding:3px 7px}
-.cal-m{font-weight:700;font-size:.95em}
-.cal-wk{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
-.cal-w{text-align:center;font-size:.65em;color:var(--tx3);padding:3px;font-weight:600}
-.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-d{
-  aspect-ratio:1;border-radius:5px;background:var(--bg);font-size:.65em;
-  display:flex;align-items:center;justify-content:center;color:var(--tx3);
-}
-.cal-d.chk{background:var(--grn);color:#fff;font-weight:700}
-.cal-d.today{border:2px solid var(--p)}
-.cal-d.fut{opacity:.25}
-
-/* Subject card */
-.sub{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:10px;border-left:4px solid var(--p)}
-.sub.math{border-left-color:var(--pk)}.sub.eng{border-left-color:var(--pg)}.sub.cs{border-left-color:var(--py)}.sub.pol{border-left-color:var(--pr)}
-
-/* Inner tabs */
-.itabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch}
-.itab{
-  padding:5px 14px;border-radius:18px;background:var(--bg3);color:var(--tx2);
-  font-size:.82em;font-weight:600;cursor:pointer;white-space:nowrap;
-  border:1px solid transparent;transition:.2s;flex-shrink:0;
-}
-.itab.on{background:rgba(108,92,231,.18);color:var(--pl);border-color:var(--p)}
-
-/* Phase card */
-.phase{position:relative;overflow:hidden}
-.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.phase.act::before{background:linear-gradient(90deg,var(--p),var(--pk))}
-.phase.done::before{background:var(--grn)}
-.phase.lock{opacity:.45}
-
-/* Form */
-.fg{margin-bottom:14px}
-.fl{display:block;font-size:.82em;color:var(--tx2);margin-bottom:5px;font-weight:600}
-.fi,.fs,.ft{
-  width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--bdr);
-  border-radius:var(--rs);color:var(--txt);font-size:.88em;outline:none;font-family:inherit;
-}
-.fi:focus,.fs:focus,.ft:focus{border-color:var(--p)}
-.ft{min-height:70px;resize:vertical}
-.fb{
-  background:var(--p);color:#fff;border:none;padding:11px 20px;border-radius:var(--rs);
-  font-weight:700;cursor:pointer;width:100%;font-size:.92em;transition:.25s;
-}
-.fb:hover{background:var(--pl)}
-
-/* Empty state */
-.empty{text-align:center;padding:30px 16px;color:var(--tx3)}
-.empty-ic{font-size:2.5em;margin-bottom:10px}.empty-t{font-size:.9em}
-
-/* Toast */
-.toast{
-  position:fixed;top:16px;left:50%;transform:translateX(-50%);
-  background:var(--grn);color:#fff;padding:10px 20px;border-radius:24px;
-  font-weight:600;font-size:.85em;z-index:999;opacity:0;transition:.3s;
-  box-shadow:0 4px 18px rgba(0,184,148,.35);pointer-events:none;
-}
+.tc{display:none}.tc.on{display:block}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--grn);color:#fff;padding:10px 20px;border-radius:24px;font-weight:600;font-size:.85em;z-index:999;opacity:0;transition:.3s;box-shadow:0 4px 18px rgba(0,184,148,.35);pointer-events:none}
 .toast.show{opacity:1}
-
-/* Bottom nav */
-.bnav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(14,14,38,.92);backdrop-filter:blur(16px);
-  border-top:1px solid var(--bdr);display:flex;justify-content:space-around;
-  padding:6px 0 env(safe-area-inset-bottom,6px);z-index:50;
-}
-.ni{
-  display:flex;flex-direction:column;align-items:center;gap:1px;padding:3px 10px;
-  cursor:pointer;color:var(--tx3);transition:.2s;background:none;border:none;font-family:inherit;
-}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(14,14,38,.92);backdrop-filter:blur(16px);border-top:1px solid var(--bdr);display:flex;justify-content:space-around;padding:6px 0 env(safe-area-inset-bottom,6px);z-index:50}
+.ni{display:flex;flex-direction:column;align-items:center;gap:1px;padding:3px 10px;cursor:pointer;color:var(--tx3);transition:.2s;background:none;border:none;font-family:inherit}
 .ni.on{color:var(--pl)}.ni-ic{font-size:1.2em}.ni-lb{font-size:.65em;font-weight:600}
-
-/* Chat */
 .chat-wrap{position:fixed;bottom:64px;right:12px;z-index:200}
-.chat-tog{
-  width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pk));
-  border:none;color:#fff;font-size:1.3em;cursor:pointer;box-shadow:0 4px 18px rgba(108,92,231,.4);
-  transition:.3s;display:flex;align-items:center;justify-content:center;
-}
+.chat-tog{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pk));border:none;color:#fff;font-size:1.3em;cursor:pointer;box-shadow:0 4px 18px rgba(108,92,231,.4);transition:.3s;display:flex;align-items:center;justify-content:center}
 .chat-tog:hover{transform:scale(1.08)}
-.chat-box{
-  position:absolute;bottom:60px;right:0;width:340px;max-width:calc(100vw - 24px);
-  height:460px;max-height:65vh;background:var(--bg2);border-radius:var(--r);
-  border:1px solid var(--bdr);display:none;flex-direction:column;
-  box-shadow:0 8px 36px rgba(0,0,0,.5);overflow:hidden;
-}
+.chat-box{position:absolute;bottom:60px;right:0;width:340px;max-width:calc(100vw - 24px);height:460px;max-height:65vh;background:var(--bg2);border-radius:var(--r);border:1px solid var(--bdr);display:none;flex-direction:column;box-shadow:0 8px 36px rgba(0,0,0,.5);overflow:hidden}
 .chat-box.open{display:flex}
-.chat-hd{
-  padding:12px 14px;background:linear-gradient(135deg,var(--bg3),var(--card));
-  border-bottom:1px solid var(--bdr);font-weight:700;font-size:.9em;
-  display:flex;justify-content:space-between;align-items:center;
-}
+.chat-hd{padding:12px 14px;background:linear-gradient(135deg,var(--bg3),var(--card));border-bottom:1px solid var(--bdr);font-weight:700;font-size:.9em;display:flex;justify-content:space-between;align-items:center}
 .chat-cl{background:none;border:none;color:var(--tx2);cursor:pointer;font-size:1.1em}
 .chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .cmsg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:.85em;line-height:1.5;word-break:break-word}
@@ -233,66 +79,95 @@ body{
 .chat-inp{padding:10px;border-top:1px solid var(--bdr);display:flex;gap:7px}
 .chat-txt{flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:18px;padding:8px 14px;color:var(--txt);font-size:.85em;outline:none}
 .chat-txt:focus{border-color:var(--p)}
-.chat-snd{
-  background:var(--p);border:none;color:#fff;width:36px;height:36px;border-radius:50%;
-  cursor:pointer;font-size:1em;display:flex;align-items:center;justify-content:center;
-}
+.chat-snd{background:var(--p);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1em;display:flex;align-items:center;justify-content:center}
+.ai-chip{padding:5px 12px;border-radius:16px;background:var(--bg3);color:var(--tx2);font-size:.78em;cursor:pointer;border:1px solid var(--bdr);transition:.2s;display:inline-block;margin:2px}
+.ai-chip:hover{border-color:var(--p);color:var(--pl)}
+.quote{background:linear-gradient(135deg,rgba(108,92,231,.1),rgba(253,121,168,.1));border-radius:var(--r);padding:16px;text-align:center;margin-bottom:12px;border:1px solid rgba(108,92,231,.15)}
+.quote-t{font-size:.95em;font-style:italic;line-height:1.6}.quote-a{font-size:.78em;color:var(--tx3);margin-top:6px}
+.cal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cal-m{font-weight:700;font-size:.95em}
+.cal-wk{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
+.cal-w{text-align:center;font-size:.65em;color:var(--tx3);padding:3px;font-weight:600}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-d{aspect-ratio:1;border-radius:5px;background:var(--bg);font-size:.65em;display:flex;align-items:center;justify-content:center;color:var(--tx3)}
+.cal-d.chk{background:var(--grn);color:#fff;font-weight:700}.cal-d.today{border:2px solid var(--p)}.cal-d.fut{opacity:.25}
+.fg{margin-bottom:14px}.fl{display:block;font-size:.82em;color:var(--tx2);margin-bottom:5px;font-weight:600}
+.fi,.fs{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rs);color:var(--txt);font-size:.88em;outline:none;font-family:inherit}
+.fi:focus,.fs:focus{border-color:var(--p)}
+.fb{background:var(--p);color:#fff;border:none;padding:11px 20px;border-radius:var(--rs);font-weight:700;cursor:pointer;width:100%;font-size:.92em;transition:.25s}
+.fb:hover{background:var(--pl)}
+.empty{text-align:center;padding:30px 16px;color:var(--tx3)}.empty-ic{font-size:2.5em;margin-bottom:10px}.empty-t{font-size:.9em}
+.sub{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:10px;border-left:4px solid var(--p)}
+.sub.math{border-left-color:var(--pk)}.sub.eng{border-left-color:var(--pg)}.sub.cs{border-left-color:var(--py)}.sub.pol{border-left-color:var(--pr)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.fi-a{animation:fi .35s ease-out}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}.pulse{animation:pulse 2s infinite}
 
-/* Tab content */
-.tc{display:none}.tc.on{display:block}
+/* Quiz styles */
+.quiz-card{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:12px;border:1px solid var(--bdr)}
+.quiz-q{font-size:.95em;font-weight:600;margin-bottom:14px;line-height:1.6}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:10px 14px;border-radius:var(--rs);background:var(--bg2);border:1px solid var(--bdr);cursor:pointer;transition:.2s;font-size:.88em;display:flex;align-items:center;gap:8px}
+.quiz-opt:hover{border-color:var(--p);background:var(--bg3)}
+.quiz-opt.selected{border-color:var(--p);background:rgba(108,92,231,.15)}
+.quiz-opt.correct{border-color:var(--grn);background:rgba(0,184,148,.15)}
+.quiz-opt.wrong{border-color:var(--pr);background:rgba(225,112,85,.15)}
+.quiz-opt .opt-letter{width:24px;height:24px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.78em;font-weight:700;flex-shrink:0}
+.quiz-opt.correct .opt-letter{background:var(--grn);color:#fff}
+.quiz-opt.wrong .opt-letter{background:var(--pr);color:#fff}
+.quiz-explain{margin-top:12px;padding:12px;border-radius:var(--rs);background:var(--bg2);font-size:.85em;line-height:1.6;color:var(--tx2);display:none}
+.quiz-explain.show{display:block}
+.quiz-nav{display:flex;gap:8px;margin-top:14px}
+.quiz-nav .fb{flex:1;font-size:.85em;padding:10px}
 
-/* Animations */
-@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.fi-a{animation:fi .35s ease-out}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-.pulse{animation:pulse 2s infinite}
+/* Word styles */
+.wcard{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:10px;text-align:center;border:1px solid var(--bdr)}
+.w-en{font-size:1.7em;font-weight:800;color:var(--pl);margin-bottom:3px}
+.w-ph{font-size:.85em;color:var(--tx3);margin-bottom:6px}
+.w-cn{font-size:1.05em;margin-bottom:10px}
+.w-acts{display:flex;gap:10px;justify-content:center}
+.wbtn{padding:7px 18px;border-radius:18px;border:1px solid var(--bdr);background:var(--bg2);color:var(--tx2);cursor:pointer;font-size:.82em;transition:.2s}
+.wbtn:hover{border-color:var(--p);color:var(--pl)}.wbtn.know{border-color:var(--grn);color:var(--grn)}.wbtn.know:hover{background:rgba(0,184,148,.12)}
+.wprog{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:.82em;color:var(--tx2)}
 
-/* Responsive */
-@media(max-width:400px){
-  .timer-d{font-size:2.2em}
-  .chat-box{width:calc(100vw - 24px)}
-}
+/* Error book */
+.err-item{padding:12px;background:var(--bg2);border-radius:var(--rs);margin-bottom:8px;border-left:3px solid var(--pr)}
+.err-q{font-size:.88em;margin-bottom:6px}.err-a{font-size:.82em;color:var(--grn)}.err-tag{font-size:.7em;color:var(--tx3);margin-top:4px}
 
-/* Add course form toggle */
-#addForm{display:none;margin-top:14px}
+/* Book item */
+.book{display:flex;gap:10px;padding:12px;background:var(--bg2);border-radius:var(--rs);margin-bottom:6px;align-items:center}
+.book-cv{width:40px;height:54px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.3em;flex-shrink:0}
+.book-i{flex:1}.book-t{font-weight:600;font-size:.9em;margin-bottom:2px}.book-d{font-size:.78em;color:var(--tx2)}
 
-/* Phase tasks list */
-.phase-tasks{margin:8px 0}
-.phase-tasks li{font-size:.85em;padding:4px 0;color:var(--txt);list-style:none}
-.phase-tasks li::before{content:'• ';color:var(--pl)}
-
-.phase-res{margin:8px 0}
-.phase-res div{font-size:.82em;padding:3px 0;color:var(--pg)}
-
-/* Profile stats grid */
+/* Profile */
 .pstats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}
 .pstat{background:var(--bg2);border-radius:var(--rs);padding:12px;text-align:center}
 .pstat-v{font-size:1.4em;font-weight:800;color:var(--pl)}.pstat-l{font-size:.75em;color:var(--tx3);margin-top:2px}
 
-/* AI suggestions */
-.ai-suggest{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.ai-chip{
-  padding:5px 12px;border-radius:16px;background:var(--bg3);color:var(--tx2);
-  font-size:.78em;cursor:pointer;border:1px solid var(--bdr);transition:.2s;
-}
-.ai-chip:hover{border-color:var(--p);color:var(--pl)}
+/* Plan phase */
+.phase{position:relative;overflow:hidden}
+.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.phase.act::before{background:linear-gradient(90deg,var(--p),var(--pk))}
 
-/* Word progress */
-.wprog{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:.82em;color:var(--tx2)}
-.wprog .pbar{flex:1}
+/* Countdown */
+.countdown{background:linear-gradient(135deg,rgba(108,92,231,.12),rgba(253,121,168,.12));border-radius:var(--r);padding:16px;text-align:center;margin-bottom:12px;border:1px solid rgba(108,92,231,.2)}
+.cd-num{font-size:2.2em;font-weight:800;background:linear-gradient(135deg,var(--pl),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cd-label{font-size:.85em;color:var(--tx2);margin-top:4px}
+
+/* Responsive */
+@media(max-width:400px){.timer-d{font-size:2.2em}.chat-box{width:calc(100vw - 24px)}}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
-    <div class="logo">🔥 StudyForge</div>
+    <div class="logo">🔥 StudyForge v2</div>
     <div class="streak">🔥 <span id="stk">0</span> 天</div>
   </div>
-
   <div class="main" id="main">
     <!-- HOME -->
     <div class="tc on" id="t-home">
-      <div class="quote fi-a"><div class="quote-t" id="qt">""</div><div class="quote-a" id="qa"></div></div>
+      <div class="quote fi-a"><div class="quote-t" id="qt"></div><div class="quote-a" id="qa"></div></div>
+      <div class="countdown fi-a" id="countdown"></div>
       <div class="checkin fi-a" id="cinArea">
         <div style="font-size:.85em;color:var(--tx2);margin-bottom:10px" id="cinDate"></div>
         <button class="cbtn pulse" id="cinBtn" onclick="doCin()">✅ 今日打卡</button>
@@ -304,43 +179,41 @@ body{
         <div class="stat"><div class="stat-v" id="sTask">0</div><div class="stat-l">完成任务数</div></div>
         <div class="stat"><div class="stat-v" id="sWord">0</div><div class="stat-l">已背单词</div></div>
       </div>
-      <div class="card fi-a"><div class="card-t">📋 今日任务</div><div id="todayT"></div></div>
+      <div class="card fi-a"><div class="card-t">📋 今日任务 <span style="font-size:.75em;color:var(--tx3);font-weight:400" id="taskDate"></span></div><div id="todayT"></div></div>
       <div class="card fi-a"><div class="card-t">📅 学习日历</div><div id="calArea"></div></div>
     </div>
-
-    <!-- PLAN -->
-    <div class="tc" id="t-plan">
-      <div class="itabs"><div class="itab on" onclick="planTab('zsb')">专升本</div><div class="itab" onclick="planTab('ky')">考研</div></div>
-      <div id="planC"></div>
+    <!-- QUIZ -->
+    <div class="tc" id="t-quiz">
+      <div class="itabs" id="qTabs">
+        <div class="itab on" onclick="quizTab('math')">📐 数学</div>
+        <div class="itab" onclick="quizTab('eng')">📗 英语</div>
+        <div class="itab" onclick="quizTab('cs')">💻 计算机</div>
+        <div class="itab" onclick="quizTab('pol')">📘 政治</div>
+        <div class="itab" onclick="quizTab('err')">❌ 错题本</div>
+      </div>
+      <div id="quizC"></div>
     </div>
-
     <!-- RESOURCES -->
     <div class="tc" id="t-res">
       <div class="itabs" id="rTabs">
         <div class="itab on" onclick="resTab('vid')">📹 视频</div>
         <div class="itab" onclick="resTab('book')">📚 教材</div>
-        <div class="itab" onclick="resTab('exam')">📝 真题</div>
         <div class="itab" onclick="resTab('uni')">🏫 院校</div>
         <div class="itab" onclick="resTab('cert')">📜 证书</div>
       </div>
       <div id="resC"></div>
     </div>
-
     <!-- TIMER -->
     <div class="tc" id="t-timer">
       <div class="card"><div class="card-t">⏱️ 学习计时器</div>
         <div class="timer-d" id="tDisp">00:00:00</div>
-        <div class="timer-c">
-          <button class="tbtn go" id="tGo" onclick="toggleT()">开始学习</button>
-          <button class="tbtn rs" onclick="resetT()">重置</button>
-        </div>
+        <div class="timer-c"><button class="tbtn go" id="tGo" onclick="toggleT()">开始学习</button><button class="tbtn rs" onclick="resetT()">重置</button></div>
         <div style="text-align:center;margin-top:10px;font-size:.82em;color:var(--tx3)" id="tStat">准备开始</div>
       </div>
       <div class="card"><div class="card-t">📖 单词背诵</div><div id="wordA"></div></div>
-      <div class="card"><div class="card-t">➕ 自定义课程</div>
-        <div id="custC"></div>
+      <div class="card"><div class="card-t">➕ 自定义课程</div><div id="custC"></div>
         <button class="fb" style="margin-top:10px" onclick="toggleForm()">+ 添加自定义课程</button>
-        <div id="addForm">
+        <div id="addForm" style="display:none;margin-top:14px">
           <div class="fg"><label class="fl">课程名称</label><input class="fi" id="cName" placeholder="例如：数据结构"></div>
           <div class="fg"><label class="fl">学习目标</label><input class="fi" id="cGoal" placeholder="例如：掌握基础数据结构"></div>
           <div class="fg"><label class="fl">每日时长(分钟)</label><input class="fi" id="cTime" type="number" value="60"></div>
@@ -349,20 +222,12 @@ body{
         </div>
       </div>
     </div>
-
     <!-- PROFILE -->
     <div class="tc" id="t-prof">
       <div class="card"><div class="card-t">👤 个人信息</div>
         <div class="fg"><label class="fl">昵称</label><input class="fi" id="pName" onchange="saveProf()"></div>
-        <div class="fg"><label class="fl">当前阶段</label>
-          <select class="fs" id="pStage" onchange="saveProf()"><option value="zsb">专升本备考</option><option value="ky">考研备考</option></select>
-        </div>
-        <div class="fg"><label class="fl">目标院校</label>
-          <select class="fs" id="pTgt" onchange="saveProf()">
-            <option value="njnu">南京大学</option><option value="sjtu">上海交通大学</option>
-            <option value="hfut">合肥工业大学</option><option value="whu">武汉大学</option>
-          </select>
-        </div>
+        <div class="fg"><label class="fl">当前阶段</label><select class="fs" id="pStage" onchange="saveProf()"><option value="zsb">专升本备考</option><option value="ky">考研备考</option></select></div>
+        <div class="fg"><label class="fl">目标院校</label><select class="fs" id="pTgt" onchange="saveProf()"><option value="hfut">合肥工业大学</option><option value="njnu">南京大学</option><option value="sjtu">上海交通大学</option><option value="whu">武汉大学</option></select></div>
         <div class="fg"><label class="fl">每日目标(分钟)</label><input class="fi" id="pDaily" type="number" value="180" onchange="saveProf()"></div>
       </div>
       <div class="card"><div class="card-t">📊 学习统计</div><div id="pStats"></div></div>
@@ -373,918 +238,595 @@ body{
       </div>
     </div>
   </div>
-
-  <!-- AI Chat -->
   <div class="chat-wrap">
     <div class="chat-box" id="chatBox">
       <div class="chat-hd"><span>🤖 AI学习助手</span><button class="chat-cl" onclick="togChat()">✕</button></div>
       <div class="chat-msgs" id="chatMsgs">
-        <div class="cmsg ai">你好！我是你的AI学习助手 💪<br><br>我可以帮你：<br>• 解答专升本/考研问题<br>• 推荐学习方法和资源<br>• 分析目标院校录取情况<br>• 制定个性化学习计划<br><br>试试点击下方快捷按钮，或直接输入问题！<br><div class="ai-suggest" id="aiSug"></div></div>
+        <div class="cmsg ai">你好！我是AI学习助手 💪<br><br>试试问我：<div style="margin-top:6px"><span class="ai-chip" onclick="askChip('专升本考什么')">专升本考什么</span><span class="ai-chip" onclick="askChip('今天学什么')">今天学什么</span><span class="ai-chip" onclick="askChip('数学怎么学')">数学怎么学</span><span class="ai-chip" onclick="askChip('还剩多少天')">还剩多少天</span><span class="ai-chip" onclick="askChip('我的薄弱点')">我的薄弱点</span><span class="ai-chip" onclick="askChip('合工大信息')">合工大信息</span></div></div>
       </div>
-      <div class="chat-inp">
-        <input class="chat-txt" id="chatIn" placeholder="输入你的问题..." onkeydown="if(event.key==='Enter')sendMsg()">
-        <button class="chat-snd" onclick="sendMsg()">➤</button>
-      </div>
+      <div class="chat-inp"><input class="chat-txt" id="chatIn" placeholder="输入问题..." onkeydown="if(event.key==='Enter')sendMsg()"><button class="chat-snd" onclick="sendMsg()">➤</button></div>
     </div>
     <button class="chat-tog" onclick="togChat()">🤖</button>
   </div>
-
   <div class="bnav">
     <button class="ni on" onclick="goTab('home')"><span class="ni-ic">🏠</span><span class="ni-lb">首页</span></button>
-    <button class="ni" onclick="goTab('plan')"><span class="ni-ic">📋</span><span class="ni-lb">计划</span></button>
+    <button class="ni" onclick="goTab('quiz')"><span class="ni-ic">📝</span><span class="ni-lb">题库</span></button>
     <button class="ni" onclick="goTab('res')"><span class="ni-ic">📚</span><span class="ni-lb">资源</span></button>
     <button class="ni" onclick="goTab('timer')"><span class="ni-ic">⏱️</span><span class="ni-lb">学习</span></button>
     <button class="ni" onclick="goTab('prof')"><span class="ni-ic">👤</span><span class="ni-lb">我的</span></button>
   </div>
   <div class="toast" id="toast"></div>
 </div>
-
 <script>
 // ============================
-// StudyForge Core Engine
+// StudyForge v2 - Full Engine
 // ============================
-const D={
-  get(k,v){try{return JSON.parse(localStorage.getItem('sf_'+k))||v}catch{return v}},
-  set(k,v){localStorage.setItem('sf_'+k,JSON.stringify(v))}
-};
-
+const D={get(k,v){try{return JSON.parse(localStorage.getItem('sf_'+k))||v}catch{return v}},set(k,v){localStorage.setItem('sf_'+k,JSON.stringify(v))}};
 let S={
-  prof:D.get('prof',{name:'',stage:'zsb',target:'njnu',daily:180}),
-  cins:D.get('cins',{}),
-  stk:D.get('stk',0),
-  tMin:D.get('tMin',0),
-  tDone:D.get('tDone',0),
-  words:D.get('words',[]),
-  cust:D.get('cust',[]),
-  ts:D.get('ts',{}),
-  pp:D.get('pp',{}),
-  tRun:false,tSec:0,tIv:null,
-  pTab:'zsb',rTab:'vid',
-  wordIdx:D.get('wordIdx',0),
+  prof:D.get('prof',{name:'',stage:'zsb',target:'hfut',daily:180}),
+  cins:D.get('cins',{}),stk:D.get('stk',0),tMin:D.get('tMin',0),tDone:D.get('tDone',0),
+  words:D.get('words',[]),wordR:D.get('wordR',{}),cust:D.get('cust',[]),
+  ts:D.get('ts',{}),pp:D.get('pp',{}),errs:D.get('errs',[]),quizS:D.get('quizS',{math:0,eng:0,cs:0,pol:0}),
+  tRun:false,tSec:0,tIv:null,qTab:'math',rTab:'vid',qIdx:0,qAns:false,
 };
-
 function save(){
-  D.set('prof',S.prof);D.set('cins',S.cins);D.set('stk',S.stk);
-  D.set('tMin',S.tMin);D.set('tDone',S.tDone);D.set('words',S.words);
-  D.set('cust',S.cust);D.set('ts',S.ts);D.set('pp',S.pp);D.set('wordIdx',S.wordIdx);
+  D.set('prof',S.prof);D.set('cins',S.cins);D.set('stk',S.stk);D.set('tMin',S.tMin);
+  D.set('tDone',S.tDone);D.set('words',S.words);D.set('wordR',S.wordR);
+  D.set('cust',S.cust);D.set('ts',S.ts);D.set('pp',S.pp);D.set('errs',S.errs);D.set('quizS',S.quizS);
 }
-
 function td(){return new Date().toISOString().split('T')[0]}
 function $(id){return document.getElementById(id)}
 function toast(m,d=2200){const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d)}
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+// ---- Dates & Countdown ----
+const EXAM_DATES={zsb:'2027-04-10',ky:'2029-12-21'};
+function daysLeft(){const ex=EXAM_DATES[S.prof.stage]||EXAM_DATES.zsb;return Math.max(0,Math.ceil((new Date(ex)-new Date())/86400000))}
+function examDate(){return EXAM_DATES[S.prof.stage]||EXAM_DATES.zsb}
+function examLabel(){return S.prof.stage==='zsb'?'专升本考试':'考研初试'}
 
 // ---- Navigation ----
 function goTab(t){
   document.querySelectorAll('.tc').forEach(e=>e.classList.remove('on'));
   document.querySelectorAll('.ni').forEach(e=>e.classList.remove('on'));
   $('t-'+t).classList.add('on');
-  document.querySelectorAll('.ni')[['home','plan','res','timer','prof'].indexOf(t)].classList.add('on');
-  if(t==='plan')rPlan();if(t==='res')rRes();if(t==='timer'){rWords();rCust()}
+  document.querySelectorAll('.ni')[['home','quiz','res','timer','prof'].indexOf(t)].classList.add('on');
+  if(t==='quiz')rQuiz();if(t==='res')rRes();if(t==='timer'){rWords();rCust()}
   if(t==='prof')rProf();if(t==='home')rHome();
 }
 
 // ---- Quotes ----
-const Q=[
-  ['每一个不曾起舞的日子，都是对生命的辜负。','尼采'],
-  ['千里之行，始于足下。','老子'],
-  ['天才是百分之一的灵感加百分之九十九的汗水。','爱迪生'],
-  ['学而不思则罔，思而不学则殆。','孔子'],
-  ['宝剑锋从磨砺出，梅花香自苦寒来。','古训'],
-  ['不积跬步，无以至千里；不积小流，无以成江海。','荀子'],
-  ['书山有路勤为径，学海无涯苦作舟。','韩愈'],
-  ['世上无难事，只要肯攀登。','毛泽东'],
-  ['业精于勤，荒于嬉；行成于思，毁于随。','韩愈'],
-  ['今天多一份拼搏，明天多几份微笑。','佚名'],
-  ['专升本不是终点，是你人生新起点的门票。','StudyForge'],
-  ['你现在的努力，是为了以后有更多的选择。','佚名'],
-  ['学历不代表一切，但它是最好的敲门砖。','佚名'],
-  ['每天进步一点点，就是成功的开始。','佚名'],
-  ['坚持不一定成功，但放弃一定失败。','佚名'],
-];
+const Q=[['每一个不曾起舞的日子，都是对生命的辜负。','尼采'],['千里之行，始于足下。','老子'],['学而不思则罔，思而不学则殆。','孔子'],['宝剑锋从磨砺出，梅花香自苦寒来。','古训'],['不积跬步，无以至千里。','荀子'],['书山有路勤为径，学海无涯苦作舟。','韩愈'],['世上无难事，只要肯攀登。','毛泽东'],['你现在的努力，是为了以后有更多的选择。','StudyForge'],['每天进步一点点，就是成功的开始。','StudyForge'],['坚持不一定成功，但放弃一定失败。','佚名']];
 function rQuote(){const q=Q[new Date().getDate()%Q.length];$('qt').textContent='"'+q[0]+'"';$('qa').textContent='— '+q[1]}
+
+// ---- Countdown ----
+function rCountdown(){
+  const dl=daysLeft(),ex=examDate(),label=examLabel();
+  const tgt={hfut:'合工大',njnu:'南大',sjtu:'上交',whu:'武大'}[S.prof.target]||'合工大';
+  $('countdown').innerHTML=`<div style="font-size:.85em;color:var(--tx2);margin-bottom:6px">距离${label}还有</div><div class="cd-num">${dl}</div><div class="cd-label">天 · 目标：${tgt} · ${ex}</div>`;
+}
 
 // ---- Check-in ----
 function doCin(){
-  const d=td();
-  if(S.cins[d]){toast('今天已打卡！');return}
+  const d=td();if(S.cins[d]){toast('今天已打卡！');return}
   S.cins[d]={t:new Date().toLocaleTimeString('zh-CN'),min:0};
-  let s=0,dt=new Date();
-  while(true){const ds=dt.toISOString().split('T')[0];if(S.cins[ds]){s++;dt.setDate(dt.getDate()-1)}else break}
+  let s=0,dt=new Date();while(true){const ds=dt.toISOString().split('T')[0];if(S.cins[ds]){s++;dt.setDate(dt.getDate()-1)}else break}
   S.stk=s;save();rHome();toast('🎉 打卡成功！连续 '+s+' 天！');
 }
-
 function rCin(){
   const d=td(),btn=$('cinBtn'),hint=$('cinHint');
   $('cinDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
-  if(S.cins[d]){
-    btn.textContent='✅ 已打卡';btn.classList.add('done');btn.classList.remove('pulse');btn.disabled=true;
-    hint.textContent='打卡时间：'+S.cins[d].t;
-  }else{
-    btn.textContent='✅ 今日打卡';btn.classList.remove('done');btn.classList.add('pulse');btn.disabled=false;
-    hint.textContent='点击打卡，记录今天的学习';
-  }
+  if(S.cins[d]){btn.textContent='✅ 已打卡';btn.classList.add('done');btn.classList.remove('pulse');btn.disabled=true;hint.textContent='打卡时间：'+S.cins[d].t}
+  else{btn.textContent='✅ 今日打卡';btn.classList.remove('done');btn.classList.add('pulse');btn.disabled=false;hint.textContent='点击打卡，记录今天的学习'}
 }
-
-function rStats(){
-  $('stk').textContent=S.stk;
-  $('sDays').textContent=Object.keys(S.cins).length;
-  $('sHrs').textContent=(S.tMin/60).toFixed(1);
-  $('sTask').textContent=S.tDone;
-  $('sWord').textContent=S.words.length;
-}
+function rStats(){$('stk').textContent=S.stk;$('sDays').textContent=Object.keys(S.cins).length;$('sHrs').textContent=(S.tMin/60).toFixed(1);$('sTask').textContent=S.tDone;$('sWord').textContent=S.words.length}
 
 // ---- Calendar ----
 function rCal(){
   const now=new Date(),y=now.getFullYear(),m=now.getMonth();
   const fd=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),tdy=now.getDate();
   let h=`<div class="cal-hd"><span class="cal-m">${y}年${m+1}月</span></div>`;
-  h+='<div class="cal-wk">';'日一二三四五六'.split('').forEach(d=>h+=`<div class="cal-w">${d}</div>`);h+='</div><div class="cal-g">';
+  h+='<div class="cal-wk">'+'日一二三四五六'.split('').map(d=>`<div class="cal-w">${d}</div>`).join('')+'</div><div class="cal-g">';
   for(let i=0;i<fd;i++)h+='<div class="cal-d"></div>';
-  for(let d=1;d<=dim;d++){
-    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ck=S.cins[ds]?'chk':'',to=d===tdy?'today':'',fu=d>tdy?'fut':'';
-    h+=`<div class="cal-d ${ck} ${to} ${fu}">${d}</div>`;
-  }
+  for(let d=1;d<=dim;d++){const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const ck=S.cins[ds]?'chk':'',to=d===tdy?'today':'',fu=d>tdy?'fut':'';h+=`<div class="cal-d ${ck} ${to} ${fu}">${d}</div>`}
   h+='</div>';$('calArea').innerHTML=h;
 }
 
-// ---- Tasks ----
-const TASKS={
-  zsb:[
-    {id:'m1',text:'高等数学 - 极限与连续',tm:'60min',sub:'math'},
-    {id:'e1',text:'英语词汇 - 背诵30个单词',tm:'40min',sub:'eng'},
-    {id:'e2',text:'英语语法 - 时态/从句复习',tm:'30min',sub:'eng'},
-    {id:'c1',text:'计算机基础 - 数据表示与运算',tm:'40min',sub:'cs'},
-    {id:'r1',text:'今日复习回顾 + 错题整理',tm:'20min',sub:'review'},
-  ],
-  ky:[
-    {id:'m2',text:'高等数学 - 微积分/级数强化',tm:'90min',sub:'math'},
-    {id:'e3',text:'英语阅读理解 - 精读训练',tm:'60min',sub:'eng'},
-    {id:'e4',text:'考研词汇 - 背诵50个单词',tm:'40min',sub:'eng'},
-    {id:'p1',text:'政治 - 马原/毛中特基础',tm:'40min',sub:'pol'},
-    {id:'c2',text:'专业课 - 数据结构/算法',tm:'60min',sub:'cs'},
-    {id:'r2',text:'今日复习回顾 + 真题错题',tm:'30min',sub:'review'},
-  ],
-};
+// ---- Dynamic Tasks Based on Date ----
+function getPhase(day){
+  // day = days since start (2026-05-10)
+  if(day<=60)return 0; // Phase 1: 基础重建 (May-Jul)
+  if(day<=230)return 1; // Phase 2: 系统学习 (Jul-Dec)
+  return 2; // Phase 3: 冲刺 (Jan+)
+}
+
+function genTasks(){
+  const start=new Date('2026-05-10');
+  const now=new Date();
+  const dayIdx=Math.floor((now-start)/86400000);
+  const phase=getPhase(dayIdx);
+  const weekDay=now.getDay(); // 0=Sun
+  const isWeekend=weekDay===0||weekDay===6;
+  const dl=daysLeft();
+  const stage=S.prof.stage;
+
+  let tasks=[];
+  if(stage==='zsb'){
+    if(phase===0){
+      // 基础重建
+      tasks=[
+        {id:'m1',text:'高中数学回顾 - 函数与三角',tm:'90min',sub:'math'},
+        {id:'e1',text:`英语词汇 - 背诵${isWeekend?50:30}个单词`,tm:'40min',sub:'eng'},
+        {id:'e2',text:'英语语法 - 基础时态/从句',tm:'30min',sub:'eng'},
+        {id:'c1',text:'计算机基础 - 进制转换/数据表示',tm:'40min',sub:'cs'},
+        {id:'r1',text:'今日复习 + 错题整理',tm:'20min',sub:'math'},
+      ];
+    }else if(phase===1){
+      // 系统学习
+      const week=Math.floor((dayIdx-60)/7);
+      const mathTopics=['极限','导数','微分','积分','微分方程','级数','多元函数'];
+      const mt=mathTopics[week%mathTopics.length];
+      tasks=[
+        {id:'m2',text:`高数 - ${mt}（视频+习题）`,tm:'120min',sub:'math'},
+        {id:'e3',text:`英语阅读 - 精读训练${isWeekend?'×2':''}`,tm:'60min',sub:'eng'},
+        {id:'e4',text:`英语词汇 - 背诵${isWeekend?50:30}个单词`,tm:'40min',sub:'eng'},
+        {id:'c2',text:'计算机 - 数据结构/操作系统',tm:'60min',sub:'cs'},
+        {id:'r2',text:'今日复习 + 真题练习',tm:'30min',sub:'math'},
+      ];
+      if(isWeekend)tasks.push({id:'mock',text:'周末模拟考试（严格计时）',tm:'120min',sub:'math'});
+    }else{
+      // 冲刺
+      tasks=[
+        {id:'m3',text:'数学真题刷题 + 错题分析',tm:'120min',sub:'math'},
+        {id:'e5',text:'英语真题 + 作文模板背诵',tm:'90min',sub:'eng'},
+        {id:'c3',text:'计算机真题 + 重点笔记',tm:'60min',sub:'cs'},
+        {id:'r3',text:'错题回顾 + 薄弱点攻克',tm:'40min',sub:'math'},
+      ];
+      if(dl<30)tasks.push({id:'final',text:'🔴 考前冲刺：回顾所有错题',tm:'60min',sub:'math'});
+    }
+  }else{
+    // 考研
+    if(phase===0){
+      tasks=[
+        {id:'km1',text:'同济高数课本 - 精读+习题',tm:'90min',sub:'math'},
+        {id:'ke1',text:`考研词汇5500 - 背诵${isWeekend?80:50}词`,tm:'50min',sub:'eng'},
+        {id:'ke2',text:'英语语法 + 长难句分析',tm:'40min',sub:'eng'},
+        {id:'kr1',text:'了解目标院校招生信息',tm:'20min',sub:'cs'},
+      ];
+    }else if(phase===1){
+      tasks=[
+        {id:'km2',text:'数学强化 - 张宇/汤家凤+1000题',tm:'120min',sub:'math'},
+        {id:'ke3',text:'英语真题精读（2010-2020）',tm:'60min',sub:'eng'},
+        {id:'ke4',text:`考研词汇 - 背诵${isWeekend?80:50}词`,tm:'40min',sub:'eng'},
+        {id:'kp1',text:'政治 - 徐涛核心考案+1000题',tm:'40min',sub:'pol'},
+        {id:'kc1',text:'专业课 - 一轮复习',tm:'60min',sub:'cs'},
+      ];
+    }else{
+      tasks=[
+        {id:'km3',text:'数学真题刷3遍 + 错题攻克',tm:'120min',sub:'math'},
+        {id:'ke5',text:'英语作文+翻译+新题型',tm:'60min',sub:'eng'},
+        {id:'kp2',text:'政治肖四肖八背诵',tm:'60min',sub:'pol'},
+        {id:'kc2',text:'专业课真题+模拟',tm:'60min',sub:'cs'},
+        {id:'kr2',text:'全真模拟考试',tm:'120min',sub:'math'},
+      ];
+    }
+  }
+  return tasks;
+}
 
 function rTasks(){
-  const tasks=TASKS[S.prof.stage]||TASKS.zsb,d=td();
+  const tasks=genTasks(),d=td();
+  $('taskDate').textContent=new Date().toLocaleDateString('zh-CN',{month:'short',day:'numeric',weekday:'short'});
   let h='';
   tasks.forEach(t=>{
     const k=d+'_'+t.id,done=S.ts[k];
     h+=`<div class="task ${done?'done':''}" onclick="togTask('${k}')">
-      <div class="task-ck"></div><div class="task-txt">${t.text}</div><div class="task-tm">${t.tm}</div>
+      <div class="task-ck"></div><div class="task-txt">${t.text}</div>
+      <span class="task-sub ${t.sub}">${{math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[t.sub]||''}</span>
+      <div class="task-tm">${t.tm}</div>
     </div>`;
   });
   $('todayT').innerHTML=h;
 }
+function togTask(k){S.ts[k]=!S.ts[k];if(S.ts[k])S.tDone++;else S.tDone=Math.max(0,S.tDone-1);save();rTasks();rStats()}
 
-function togTask(k){
-  S.ts[k]=!S.ts[k];
-  if(S.ts[k])S.tDone++;else S.tDone=Math.max(0,S.tDone-1);
-  save();rTasks();rStats();
-}
-
-// ---- Study Plan ----
-const PLAN={
-  zsb:{
-    title:'安徽专升本备考计划',sub:'2027年考试 · 满分450分 · 公共课300+专业课150',
-    phases:[
-      {name:'第一阶段：基础重建',per:'2026年5月 → 2026年7月',tag:'act',
-       desc:'从零开始，重建数学和英语基础。这是最关键的阶段，地基打牢后面才轻松。',
-       tasks:['高中数学回顾：函数、三角函数、数列、不等式（每天1.5h）','英语音标+基础语法重新学习（每天1h）','计算机基础概念入门：进制、数据表示（每天30min）','制定单词计划：每天30词，用墨墨/不背单词APP','每周做一套基础测试，检验学习效果'],
-       res:['B站：宋浩老师《高等数学》零基础版 — 最适合从头学','B站：刘晓艳《英语语法》基础班 — 通俗易懂','APP：墨墨背单词 / 不背单词 — 科学记忆','B站：计算机基础速成课 — 快速入门'],
-       links:[{t:'宋浩高数',u:'https://www.bilibili.com/video/BV1Eb411F7Pb'},{t:'刘晓艳语法',u:'https://www.bilibili.com/video/BV1hE411F7FS'}]},
-      {name:'第二阶段：系统学习',per:'2026年7月 → 2026年12月',tag:'lock',
-       desc:'边实习边学习，系统掌握全部考试内容。实习日每天至少2.5小时，周末全天。',
-       tasks:['高数：导数→积分→微分方程→级数（每天2h）','英语：阅读+完形+翻译+写作轮训（每天1.5h）','计算机：数据结构+操作系统+计算机网络（每天1h）','周末：做一套完整真题+错题分析','单词量目标：累计3000+'],
-       res:['B站：汤家凤《高等数学》基础班 — 讲解细致','B站：田静《句句真研》— 长难句分析','中国大学MOOC：操作系统/计算机网络','B站：专升本英语真题讲解合集'],
-       links:[{t:'汤家凤高数',u:'https://www.bilibili.com/video/BV1fK4y1s7RD'},{t:'MOOC平台',u:'https://www.icourse163.org/'}]},
-      {name:'第三阶段：强化冲刺',per:'2027年1月 → 2027年3月',tag:'lock',
-       desc:'考前最后3个月，真题为主，查漏补缺，调整心态。',
-       tasks:['近5年真题反复刷，每套至少做3遍','错题本整理：按题型分类，重点攻克薄弱环节','英语作文模板背诵（15篇范文）','每周六全真模拟考试，严格计时','考前一周：回顾错题+调整作息'],
-       res:['安徽省教育招生考试院 — 真题下载','各大机构押题卷（考前1个月出）','小红书/B站专升本经验帖 — 避坑指南'],
-       links:[{t:'安徽考试院',u:'https://www.ahzsks.cn/'},{t:'专升本报名',u:'https://www.ahzsks.cn/'}]},
-    ]
-  },
-  ky:{
-    title:'考研备考计划',sub:'目标院校：南大/上交/合工大/武大 · 2029年12月考试',
-    phases:[
-      {name:'第一阶段：基础夯实',per:'2026年5月 → 2027年6月',tag:'act',
-       desc:'与专升本并行，提前打牢考研数学和英语基础。专升本成功后转入全力备考。',
-       tasks:['数学：同济高数课本精读+课后习题（配合专升本）','英语：考研5500词第一轮（每天50词，用墨墨）','了解目标院校招生简章、报录比、复试线','确定方向：学硕vs专硕、计算机vs人工智能','政治：暂时不急，先关注时事新闻'],
-       res:['B站：张宇《高等数学》基础30讲','B站：朱伟《恋练有词》词汇课','研招网：院校信息查询','小红书：考研院校选择攻略'],
-       links:[{t:'研招网',u:'https://yz.chsi.com.cn/'},{t:'张宇高数',u:'https://www.bilibili.com/video/BV1bE411N7nt'}]},
-      {name:'第二阶段：系统强化',per:'2027年7月 → 2028年6月',tag:'lock',
-       desc:'本科期间系统复习考研四科，这是最核心的阶段。',
-       tasks:['数学：张宇/汤家凤强化班+1000题+660题','英语：真题阅读精读（2010-2023），逐句翻译','政治：徐涛核心考案+肖秀荣1000题（暑假开始）','专业课：确定目标院校教材，一轮复习','单词量目标：考研5500词过3遍'],
-       res:['B站：徐涛政治全程班 — 讲解生动','B站：李永乐线性代数+王式安概率论','肖秀荣政治全套','目标院校研究生院官网'],
-       links:[{t:'徐涛政治',u:'https://www.bilibili.com/video/BV1hE411F7FS'},{t:'南大研究生院',u:'https://grawww.nju.edu.cn/'},{t:'合工大研究生院',u:'http://yjszs.hfut.edu.cn/'}]},
-      {name:'第三阶段：真题冲刺',per:'2028年7月 → 2028年12月',tag:'lock',
-       desc:'最后半年，真题+模拟+背诵，全力冲刺目标分数。',
-       tasks:['数学真题刷3遍（近15年），错题反复攻克','英语作文模板+翻译+新题型训练','政治：肖八选择题+肖四大题全背','专业课真题+模拟题+重点笔记','每周全真模拟，严格按考试时间','考前一个月：调整心态+查漏补缺'],
-       res:['肖秀荣四套卷+八套卷 — 政治必备','张宇最后四套卷/合工大模拟卷','历年真题合集（数学/英语/政治）','考研帮/研招网信息'],
-       links:[{t:'研招网报名',u:'https://yz.chsi.com.cn/'},{t:'学信网',u:'https://www.chsi.com.cn/'}]},
-    ]
-  },
+// ---- Quiz Bank ----
+const QUIZZES={
+  math:[
+    {q:'lim(x→0) sin(x)/x = ?',opts:['0','1','∞','不存在'],ans:1,exp:'这是第一个重要极限，lim(x→0) sin(x)/x = 1，是微积分的基础。'},
+    {q:'函数f(x)=x²在x=1处的导数是？',opts:['0','1','2','3'],ans:2,exp:"f'(x)=2x，所以f'(1)=2×1=2。"},
+    {q:'∫0到1 x² dx = ?',opts:['1/2','1/3','1/4','1'],ans:1,exp:'∫x² dx = x³/3，代入0和1得 1/3 - 0 = 1/3。'},
+    {q:'以下哪个是无穷小量？',opts:['1/x (x→∞)','sinx (x→0)','eˣ (x→∞)','lnx (x→0⁺)'],ans:1,exp:'sinx在x→0时趋于0，是无穷小量。1/x→0也是，但sinx (x→0)是最典型的。'},
+    {q:'函数y=x³-3x的极值点是？',opts:['x=0','x=1和x=-1','x=3','无极值'],ans:1,exp:"y'=3x²-3=0，x²=1，x=±1。y''=6x，在x=1处y''>0(极小)，x=-1处y''<0(极大)。"},
+    {q:'d/dx [e²ˣ] = ?',opts:['e²ˣ','2e²ˣ','2xe²ˣ','e²ˣ/2'],ans:1,exp:'复合函数求导：d/dx[e²ˣ] = e²ˣ · d/dx[2x] = 2e²ˣ。'},
+    {q:'∫ 1/x dx = ?',opts:['1/x² + C','ln|x| + C','-1/x² + C','x + C'],ans:1,exp:'∫1/x dx = ln|x| + C，这是基本积分公式。'},
+    {q:'级数Σ(1/n²)是？',opts:['发散','收敛','条件收敛','无法判断'],ans:1,exp:'这是p-级数，p=2>1，所以收敛。p-级数在p>1时收敛，p≤1时发散。'},
+    {q:'函数f(x)=|x|在x=0处？',opts:['可导','连续但不可导','不连续','既连续又可导'],ans:1,exp:'|x|在x=0处连续但不可导，因为左导数=-1，右导数=1，不相等。'},
+    {q:'矩阵的秩等于其？',opts:['行数','列数','非零子式的最高阶数','行列式的值'],ans:2,exp:'矩阵的秩定义为矩阵中非零子式的最高阶数。'},
+  ],
+  eng:[
+    {q:'The teacher asked Tom _______ late again.',opts:['not be','not to be','don\'t be','to not be'],ans:1,exp:'ask sb to do sth 的否定：ask sb not to do sth。'},
+    {q:'I have been waiting for two hours. 时态是？',opts:['现在完成时','现在完成进行时','过去完成时','过去进行时'],ans:1,exp:'have been + doing = 现在完成进行时，表示从过去持续到现在的动作。'},
+    {q:'Not until midnight _______ his homework.',opts:['he finished','did he finish','he had finished','had he finished'],ans:1,exp:'Not until位于句首要部分倒装，助动词did提前。'},
+    {q:'The book _____ by him last year is very popular.',opts:['writing','written','wrote','was written'],ans:1,exp:'过去分词written作后置定语，修饰book。相当于which was written。'},
+    {q:'It is high time that we _______ action.',opts:['take','took','taken','will take'],ans:1,exp:'It is high time + 从句用虚拟语气，动词用过去式。'},
+    {q:'He suggested that we _______ early.',opts:['leave','left','leaving','would leave'],ans:1,exp:'suggest/suggest that + (should) + 动词原形，虚拟语气。'},
+    {q:'_______ the rain, we continued our journey.',opts:['Although','Despite','In spite','However'],ans:1,exp:'Despite + 名词 = 尽管。Although + 从句。这里rain是名词，用Despite。'},
+    {q:'This is the factory _______ I worked last year.',opts:['which','where','that','when'],ans:1,exp:'先行词factory是地点，从句中worked是不及物动词，用where引导定语从句。'},
+    {q:'He is _______ honest man that everyone trusts him.',opts:['such a','so a','such an','so an'],ans:2,exp:'such + a/an + adj + n，honest以元音开头用an。such an honest man。'},
+    {q:'The number of students _______ increasing.',opts:['are','is','have','has'],ans:1,exp:'the number of + 复数名词 + 单数动词。a number of + 复数名词 + 复数动词。'},
+  ],
+  cs:[
+    {q:'二进制数1011转换为十进制是？',opts:['9','10','11','12'],ans:2,exp:'1×2³+0×2²+1×2¹+1×2⁰=8+0+2+1=11。'},
+    {q:'栈的特点是？',opts:['先进先出','先进后出','随机访问','按优先级出'],ans:1,exp:'栈(Stack)是后进先出(LIFO)的数据结构，就像叠盘子。'},
+    {q:'以下哪个不是操作系统？',opts:['Linux','Windows','Oracle','macOS'],ans:2,exp:'Oracle是数据库管理系统(DBMS)，不是操作系统。Linux/Windows/macOS都是OS。'},
+    {q:'TCP/IP模型有几层？',opts:['3层','4层','5层','7层'],ans:1,exp:'TCP/IP模型有4层：网络接口层、网际层、传输层、应用层。OSI有7层。'},
+    {q:'时间复杂度O(nlogn)的排序算法是？',opts:['冒泡排序','快速排序','插入排序','选择排序'],ans:1,exp:'快速排序平均时间复杂度为O(nlogn)。冒泡/插入/选择都是O(n²)。'},
+    {q:'1KB等于多少字节？',opts:['1000','1024','512','2048'],ans:1,exp:'1KB = 1024 bytes = 2¹⁰ bytes。计算机中用2的幂次。'},
+    {q:'以下哪个是面向对象的特性？',opts:['递归','封装','循环','排序'],ans:1,exp:'面向对象三大特性：封装、继承、多态。递归和循环是算法概念。'},
+    {q:'IPv4地址由几位二进制组成？',opts:['16位','32位','64位','128位'],ans:1,exp:'IPv4地址是32位（4字节），如192.168.1.1。IPv6是128位。'},
+    {q:'SQL中用于查询的关键字是？',opts:['INSERT','SELECT','UPDATE','DELETE'],ans:1,exp:'SELECT用于查询数据。INSERT插入，UPDATE更新，DELETE删除。'},
+    {q:'进程和线程的关系是？',opts:['线程包含进程','进程包含线程','两者无关系','两者等同'],ans:1,exp:'进程是资源分配的基本单位，线程是CPU调度的基本单位。一个进程可以包含多个线程。'},
+  ],
+  pol:[
+    {q:'唯物辩证法的核心是？',opts:['质量互变规律','对立统一规律','否定之否定规律','联系与发展'],ans:1,exp:'对立统一规律（矛盾规律）是唯物辩证法的核心和实质。'},
+    {q:'实践是检验真理的唯一标准，这体现了？',opts:['认识论','唯物论','辩证法','历史观'],ans:0,exp:'实践是检验真理的唯一标准属于认识论范畴，强调实践对认识的决定作用。'},
+    {q:'社会主义的本质是？',opts:['公有制','按劳分配','解放和发展生产力','共同富裕'],ans:2,exp:'邓小平指出社会主义的本质是解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到共同富裕。'},
+    {q:'新民主主义革命的对象是？',opts:['帝国主义、封建主义、官僚资本主义','帝国主义、资本主义','封建主义、帝国主义','资产阶级、地主阶级'],ans:0,exp:'新民主主义革命的三大敌人：帝国主义（首要）、封建主义、官僚资本主义。'},
+    {q:'科学发展观的核心是？',opts:['发展','以人为本','全面协调可持续','统筹兼顾'],ans:1,exp:'科学发展观第一要义是发展，核心是以人为本，基本要求是全面协调可持续，根本方法是统筹兼顾。'},
+    {q:'我国的根本政治制度是？',opts:['多党合作制','民族区域自治','人民代表大会制度','基层民主'],ans:2,exp:'人民代表大会制度是我国的根本政治制度。'},
+    {q:'量变和质变的关系是？',opts:['量变就是质变','质变是量变的必然结果','两者无关','质变先于量变'],ans:1,exp:'量变是质变的必要准备，质变是量变的必然结果。量变积累到一定程度必然引起质变。'},
+    {q:'物质的唯一特性是？',opts:['运动性','客观实在性','可知性','永恒性'],ans:1,exp:'物质的唯一特性是客观实在性，它存在于人的意识之外，可以为人的意识所反映。'},
+  ],
 };
 
-function rPlan(){
-  const p=PLAN[S.pTab];
-  let h=`<div class="card"><div class="card-t">${p.title}</div><div style="font-size:.82em;color:var(--tx2)">${p.sub}</div></div>`;
-  p.phases.forEach((ph,i)=>{
-    const pk=S.pTab+'_p'+i,prog=S.pp[pk]||0;
-    const tagLabel=ph.tag==='act'?'进行中':ph.tag==='done'?'已完成':'未开始';
-    h+=`<div class="card phase ${ph.tag}">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="card-t" style="margin:0">${ph.name}</div>
-        <span style="font-size:.72em;padding:2px 8px;border-radius:10px;background:rgba(108,92,231,.15);color:var(--pl)">${tagLabel}</span>
-      </div>
-      <div style="font-size:.82em;color:var(--tx2);margin-bottom:6px">${ph.per}</div>
-      <div style="font-size:.88em;margin-bottom:10px">${ph.desc}</div>
-      <div class="pbar"><div class="pfill" style="width:${prog}%"></div></div>
-      <div style="font-size:.75em;color:var(--tx3);margin-bottom:10px">进度 ${prog}%</div>
-      <div style="font-size:.82em;font-weight:600;color:var(--tx2);margin-bottom:6px">📌 每日任务：</div>
-      <ul class="phase-tasks">${ph.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>
-      <div style="font-size:.82em;font-weight:600;color:var(--tx2);margin:10px 0 6px">🎓 推荐资源：</div>
-      <div class="phase-res">${ph.res.map(r=>`<div>→ ${r}</div>`).join('')}</div>
-      ${ph.links?`<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">${ph.links.map(l=>`<a href="${l.u}" target="_blank" style="font-size:.78em;color:var(--pg);text-decoration:none;padding:3px 8px;background:var(--bg2);border-radius:8px">🔗 ${l.t}</a>`).join('')}</div>`:''}
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button class="fb" style="flex:1;font-size:.82em;padding:8px" onclick="updProg('${pk}',${Math.min(100,prog+10)})">进度+10%</button>
-        <button class="fb" style="flex:1;font-size:.82em;padding:8px;background:var(--grn)" onclick="updProg('${pk}',100)">标记完成</button>
-      </div>
-    </div>`;
-  });
-  $('planC').innerHTML=h;
+function quizTab(t){
+  S.qTab=t;S.qIdx=0;S.qAns=false;
+  const tabs=['math','eng','cs','pol','err'];
+  document.querySelectorAll('#qTabs .itab').forEach((e,i)=>e.classList.toggle('on',i===tabs.indexOf(t)));
+  rQuiz();
 }
 
-function planTab(t){
-  S.pTab=t;
-  document.querySelectorAll('#t-plan .itab').forEach((e,i)=>e.classList.toggle('on',i===(t==='zsb'?0:1)));
-  rPlan();
+function rQuiz(){
+  if(S.qTab==='err'){rErrBook();return}
+  const qs=QUIZZES[S.qTab]||[];
+  if(!qs.length){$('quizC').innerHTML='<div class="empty"><div class="empty-ic">📝</div><div class="empty-t">暂无题目</div></div>';return}
+  const qi=qs[S.qIdx];
+  const labels=['A','B','C','D'];
+  let h=`<div class="quiz-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span style="font-size:.82em;color:var(--tx2)">${{math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[S.qTab]} · 第${S.qIdx+1}/${qs.length}题</span>
+      <span style="font-size:.78em;color:var(--tx3)">得分：${S.quizS[S.qTab]||0}</span>
+    </div>
+    <div class="quiz-q">${qi.q}</div>
+    <div class="quiz-opts">`;
+  qi.opts.forEach((o,i)=>{
+    h+=`<div class="quiz-opt${S.qAns?(i===qi.ans?' correct':i===S.qSel&&i!==qi.ans?' wrong':''):''}" onclick="ansQuiz(${i})" ${S.qAns?'style="pointer-events:none"':''}>
+      <span class="opt-letter">${labels[i]}</span><span>${o}</span>
+    </div>`;
+  });
+  h+=`</div><div class="quiz-explain${S.qAns?' show':''}">${qi.exp}</div>`;
+  h+=`<div class="quiz-nav">`;
+  if(S.qIdx>0)h+=`<button class="fb" style="background:var(--bg3);color:var(--tx2);border:1px solid var(--bdr)" onclick="prevQ()">上一题</button>`;
+  if(S.qAns){
+    if(S.qIdx<qs.length-1)h+=`<button class="fb" onclick="nextQ()">下一题</button>`;
+    else h+=`<button class="fb" onclick="S.qIdx=0;S.qAns=false;rQuiz()">重新开始</button>`;
+  }
+  h+=`</div></div>`;
+  $('quizC').innerHTML=h;
 }
-function updProg(k,v){S.pp[k]=v;save();rPlan();toast('进度已更新！')}
+
+function ansQuiz(i){
+  if(S.qAns)return;
+  S.qSel=i;S.qAns=true;
+  const qs=QUIZZES[S.qTab];
+  if(i===qs[S.qIdx].ans){S.quizS[S.qTab]=(S.quizS[S.qTab]||0)+1;toast('✅ 正确！')}
+  else{
+    toast('❌ 错误');
+    // Add to error book
+    const q=qs[S.qIdx];
+    if(!S.errs.find(e=>e.q===q.q)){
+      S.errs.push({q:q.q,a:q.opts[q.ans],exp:q.exp,sub:S.qTab,date:td()});
+    }
+  }
+  save();rQuiz();
+}
+function nextQ(){S.qIdx++;S.qAns=false;rQuiz()}
+function prevQ(){S.qIdx=Math.max(0,S.qIdx-1);S.qAns=false;rQuiz()}
+
+function rErrBook(){
+  if(!S.errs.length){$('quizC').innerHTML='<div class="empty"><div class="empty-ic">🎉</div><div class="empty-t">错题本为空，继续保持！</div></div>';return}
+  let h=`<div class="card"><div class="card-t">❌ 错题本（${S.errs.length}题）</div></div>`;
+  h+=`<button class="fb" style="margin-bottom:12px;background:var(--pr)" onclick="S.errs=[];save();rErrBook()">清空错题本</button>`;
+  S.errs.forEach((e,i)=>{
+    h+=`<div class="err-item">
+      <div class="err-q">${e.q}</div>
+      <div class="err-a">✅ 正确答案：${e.a}</div>
+      <div style="font-size:.82em;color:var(--tx2);margin-top:4px">${e.exp}</div>
+      <div class="err-tag">${{math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[e.sub]||''} · ${e.date}</div>
+    </div>`;
+  });
+  $('quizC').innerHTML=h;
+}
 
 // ---- Resources ----
 const RES={
   vid:[
-    {ic:'🎬',bg:'#ff6b6b',t:'宋浩老师 - 高等数学（零基础）',d:'B站播放量最高的高数课，从零讲起，通俗易懂',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1Eb411F7Pb'},
-    {ic:'🎬',bg:'#ff6b6b',t:'张宇 - 考研数学基础30讲',d:'考研数学名师，适合有一定基础后进阶',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1bE411N7nt'},
-    {ic:'🎬',bg:'#ff6b6b',t:'汤家凤 - 高等数学基础班',d:'基础薄弱首选，讲解极其细致',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1fK4y1s7RD'},
-    {ic:'🎬',bg:'#48dbfb',t:'刘晓艳 - 英语语法基础',d:'专升本/考研英语语法从零开始',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1hE411F7FS'},
-    {ic:'🎬',bg:'#48dbfb',t:'田静 - 句句真研（长难句）',d:'英语长难句分析，考研必备技能',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1cE411N7GV'},
-    {ic:'🎬',bg:'#48dbfb',t:'朱伟 - 恋练有词（词汇）',d:'词根词缀记忆法，考研词汇首选',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1wE411c7jq'},
-    {ic:'🎬',bg:'#ff9ff3',t:'徐涛 - 考研政治全程班',d:'政治讲解最生动的老师，全程跟就行',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1hE411F7FS'},
-    {ic:'🎬',bg:'#ffa502',t:'李永乐 - 线性代数',d:'线代王者，考研线代必看',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1aE411F7pS'},
-    {ic:'🎓',bg:'#6c5ce7',t:'中国大学MOOC',d:'985高校官方课程，系统学习首选平台',tag:'MOOC平台',u:'https://www.icourse163.org/'},
-    {ic:'🎓',bg:'#6c5ce7',t:'学堂在线（清华）',d:'清华发起的在线教育平台',tag:'MOOC平台',u:'https://www.xuetangx.com/'},
-    {ic:'🎓',bg:'#6c5ce7',t:'网易公开课',d:'国内外名校公开课免费看',tag:'平台',u:'https://open.163.com/'},
+    {ic:'🎬',bg:'#ff6b6b',t:'宋浩老师 - 高等数学（零基础）',d:'B站播放量最高的高数课，从零讲起',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1Eb411F7Pb'},
+    {ic:'🎬',bg:'#ff6b6b',t:'张宇 - 考研数学基础30讲',d:'考研数学名师，适合进阶',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1bE411N7nt'},
+    {ic:'🎬',bg:'#ff6b6b',t:'汤家凤 - 高等数学基础班',d:'基础薄弱首选，讲解细致',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1fK4y1s7RD'},
+    {ic:'🎬',bg:'#48dbfb',t:'刘晓艳 - 英语语法基础',d:'专升本/考研语法从零开始',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1hE411F7FS'},
+    {ic:'🎬',bg:'#48dbfb',t:'田静 - 句句真研',d:'英语长难句分析',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1cE411N7GV'},
+    {ic:'🎬',bg:'#48dbfb',t:'朱伟 - 恋练有词',d:'词根词缀记忆法',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1wE411c7jq'},
+    {ic:'🎬',bg:'#ff9ff3',t:'徐涛 - 考研政治全程班',d:'政治讲解最生动',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1hE411F7FS'},
+    {ic:'🎬',bg:'#ffa502',t:'李永乐 - 线性代数',d:'线代王者',tag:'B站·免费',u:'https://www.bilibili.com/video/BV1aE411F7pS'},
+    {ic:'🎓',bg:'#6c5ce7',t:'中国大学MOOC',d:'985高校官方课程',tag:'平台',u:'https://www.icourse163.org/'},
+    {ic:'🎓',bg:'#6c5ce7',t:'学堂在线',d:'清华发起的在线教育',tag:'平台',u:'https://www.xuetangx.com/'},
   ],
   book:[
-    {ic:'📕',bg:'#ff6b6b',t:'同济《高等数学》第七版（上下册）',d:'考研数学指定教材，必须精读',tag:'数学·必备'},
-    {ic:'📕',bg:'#ff6b6b',t:'张宇《高等数学18讲》',d:'考研辅导经典，配合视频使用',tag:'数学·强化'},
-    {ic:'📕',bg:'#ff6b6b',t:'李永乐《复习全书》',d:'数学全面复习，题型覆盖广',tag:'数学·全书'},
-    {ic:'📕',bg:'#ff6b6b',t:'汤家凤《接力题典1800》',d:'数学基础练习题集',tag:'数学·练习'},
-    {ic:'📗',bg:'#48dbfb',t:'《专升本英语词汇闪过》',d:'专升本高频词汇，按频率排序',tag:'英语·词汇'},
-    {ic:'📗',bg:'#48dbfb',t:'朱伟《恋练有词》',d:'考研词汇经典教材',tag:'英语·词汇'},
-    {ic:'📗',bg:'#48dbfb',t:'张剑《黄皮书》真题解析',d:'考研英语真题权威解析',tag:'英语·真题'},
-    {ic:'📘',bg:'#ffa502',t:'肖秀荣《精讲精练》',d:'考研政治教材，配合1000题',tag:'政治·必备'},
-    {ic:'📘',bg:'#ffa502',t:'肖四肖八',d:'考前押题神器，政治大题全靠它',tag:'政治·冲刺'},
-    {ic:'📙',bg:'#00cec9',t:'严蔚敏《数据结构》C语言版',d:'计算机专业经典教材',tag:'计算机·基础'},
-    {ic:'📙',bg:'#00cec9',t:'王道考研系列（408）',d:'计算机考研专业课必备',tag:'计算机·考研'},
-  ],
-  exam:[
-    {ic:'📝',bg:'#ff6b6b',t:'安徽专升本历年真题',d:'安徽省教育招生考试院官方发布',tag:'专升本·官方',u:'https://www.ahzsks.cn/'},
-    {ic:'📝',bg:'#ff6b6b',t:'专升本数学真题精解（近10年）',d:'按题型分类汇编+详细解析',tag:'专升本·数学'},
-    {ic:'📝',bg:'#48dbfb',t:'专升本英语真题汇编（近10年）',d:'英语真题+答案+解析',tag:'专升本·英语'},
-    {ic:'📝',bg:'#ffa502',t:'考研数学真题大全（30年）',d:'数一/数二/数三历年真题+解析',tag:'考研·数学'},
-    {ic:'📝',bg:'#48dbfb',t:'考研英语真题精读（2010-2024）',d:'英语一/二真题逐句解析',tag:'考研·英语'},
-    {ic:'📝',bg:'#ffa502',t:'肖秀荣1000题',d:'考研政治配套练习题',tag:'考研·政治'},
-    {ic:'🌐',bg:'#6c5ce7',t:'研招网 - 考研信息总站',d:'报名、成绩查询、调剂唯一官方网站',tag:'官方网站',u:'https://yz.chsi.com.cn/'},
+    {ic:'📕',bg:'#ff6b6b',t:'同济《高等数学》第七版',d:'考研数学指定教材',tag:'数学·必备'},
+    {ic:'📕',bg:'#ff6b6b',t:'张宇《高等数学18讲》',d:'考研辅导经典',tag:'数学·强化'},
+    {ic:'📕',bg:'#ff6b6b',t:'李永乐《复习全书》',d:'数学全面复习',tag:'数学·全书'},
+    {ic:'📗',bg:'#48dbfb',t:'《专升本英语词汇闪过》',d:'高频词汇按频率排序',tag:'英语·词汇'},
+    {ic:'📗',bg:'#48dbfb',t:'张剑《黄皮书》真题',d:'考研英语真题权威版',tag:'英语·真题'},
+    {ic:'📘',bg:'#ffa502',t:'肖秀荣《精讲精练》',d:'考研政治教材',tag:'政治·必备'},
+    {ic:'📘',bg:'#ffa502',t:'肖四肖八',d:'考前押题神器',tag:'政治·冲刺'},
+    {ic:'📙',bg:'#00cec9',t:'严蔚敏《数据结构》',d:'计算机经典教材',tag:'计算机'},
+    {ic:'📙',bg:'#00cec9',t:'王道考研408系列',d:'计算机考研必备',tag:'计算机·考研'},
   ],
   uni:[
-    {n:'南京大学',lv:'985 / 211 / 双一流 / C9联盟',loc:'江苏南京',sc:'考研复试线约350-380分（计算机）',
-     desc:'C9联盟顶级高校，计算机学科评估A级，AI研究国内领先。竞争极其激烈，需要各科均衡高分。',
-     w:'https://www.nju.edu.cn/',g:'https://grawww.nju.edu.cn/',e:'https://yz.chsi.com.cn/',
-     tags:['计算机A','人工智能强','C9联盟']},
-    {n:'上海交通大学',lv:'985 / 211 / 双一流 / C9联盟',loc:'上海',sc:'考研复试线约360-390分（计算机）',
-     desc:'C9联盟工科名校，计算机学科评估A级，地处上海就业优势明显。难度极高。',
-     w:'https://www.sjtu.edu.cn/',g:'https://yzb.sjtu.edu.cn/',e:'https://yz.chsi.com.cn/',
-     tags:['工科顶尖','上海就业','C9联盟']},
-    {n:'合肥工业大学',lv:'211 / 双一流',loc:'安徽合肥',sc:'考研复试线约300-340分（计算机）',
-     desc:'安徽省内顶级工科院校，211学历性价比极高。离家近、竞争相对小、就业认可度高。最现实的选择。',
-     w:'https://www.hfut.edu.cn/',g:'http://yjszs.hfut.edu.cn/',e:'https://yz.chsi.com.cn/',
-     tags:['性价比高','安徽首选','211学历']},
-    {n:'武汉大学',lv:'985 / 211 / 双一流',loc:'湖北武汉',sc:'考研复试线约340-370分（计算机）',
-     desc:'综合性名校，计算机学科评估A级，校园环境优美。难度中上。',
-     w:'https://www.whu.edu.cn/',g:'https://gs.whu.edu.cn/',e:'https://yz.chsi.com.cn/',
-     tags:['综合名校','计算机A','985']},
-    {n:'安徽专升本可选院校',lv:'公办本科',loc:'安徽省内',sc:'2025年省控线约200-280分',
-     desc:'安徽师范大学、安徽农业大学、安徽工业大学、安徽理工大学、安徽建筑大学、安徽中医药大学等。',
-     w:'https://www.ahzsks.cn/',g:'',e:'https://www.ahzsks.cn/',
-     tags:['专升本','公办本科']},
+    {n:'合肥工业大学',lv:'211 / 双一流',loc:'安徽合肥',sc:'复试线约300-340分',desc:'安徽省内顶级工科院校，211性价比极高，离家近竞争相对小。最现实的选择。',w:'https://www.hfut.edu.cn/',g:'http://yjszs.hfut.edu.cn/',e:'https://yz.chsi.com.cn/',tags:['性价比高','安徽首选']},
+    {n:'南京大学',lv:'985 / 211 / C9联盟',loc:'江苏南京',sc:'复试线约350-380分',desc:'C9联盟顶级高校，计算机A级学科。竞争极其激烈。',w:'https://www.nju.edu.cn/',g:'https://grawww.nju.edu.cn/',e:'https://yz.chsi.com.cn/',tags:['C9','极难']},
+    {n:'上海交通大学',lv:'985 / 211 / C9联盟',loc:'上海',sc:'复试线约360-390分',desc:'C9工科名校，地处上海就业优势明显。难度最高。',w:'https://www.sjtu.edu.cn/',g:'https://yzb.sjtu.edu.cn/',e:'https://yz.chsi.com.cn/',tags:['工科顶尖','极难']},
+    {n:'武汉大学',lv:'985 / 211 / 双一流',loc:'湖北武汉',sc:'复试线约340-370分',desc:'综合性名校，计算机A级学科。难度中上。',w:'https://www.whu.edu.cn/',g:'https://gs.whu.edu.cn/',e:'https://yz.chsi.com.cn/',tags:['985','综合']},
+    {n:'安徽专升本院校',lv:'公办本科',loc:'安徽',sc:'省控线约200-280分',desc:'安徽师范大学、安徽农业大学、安徽工业大学等。',w:'https://www.ahzsks.cn/',g:'',e:'https://www.ahzsks.cn/',tags:['专升本']},
   ],
   cert:[
-    {ic:'📜',bg:'#ffa502',t:'全国计算机等级考试（NCRE）',d:'二级C语言/Python/Java，专升本加分项',u:'https://ncre.neea.edu.cn/'},
-    {ic:'📜',bg:'#48dbfb',t:'大学英语四六级（CET-4/6）',d:'CET-4/6，考研复试重要参考',u:'https://cet.neea.edu.cn/'},
-    {ic:'📜',bg:'#ff6b6b',t:'普通话水平测试',d:'教师资格证前置条件',u:'https://www.cltt.org/'},
-    {ic:'📜',bg:'#6c5ce7',t:'教师资格证',d:'非师范生可考，拓宽就业面',u:'http://ntce.neea.edu.cn/'},
-    {ic:'📜',bg:'#00cec9',t:'软考（计算机技术与软件）',d:'中级/高级职称认证，IT行业认可',u:'https://www.ruankao.org.cn/'},
-    {ic:'📜',bg:'#ff9ff3',t:'PAT / CCF CSP',d:'编程能力认证，考研复试加分',u:'https://www.patest.cn/'},
-    {ic:'🌐',bg:'#6c5ce7',t:'安徽省专升本报名入口',d:'安徽省教育招生考试院',u:'https://www.ahzsks.cn/'},
-    {ic:'🌐',bg:'#6c5ce7',t:'研招网考研报名',d:'全国硕士研究生统一招生考试',u:'https://yz.chsi.com.cn/'},
-    {ic:'🌐',bg:'#ffa502',t:'学信网',d:'学历查询、学籍验证、学信档案',u:'https://www.chsi.com.cn/'},
+    {ic:'📜',bg:'#ffa502',t:'全国计算机等级考试(NCRE)',d:'二级C/Python，专升本加分',u:'https://ncre.neea.edu.cn/'},
+    {ic:'📜',bg:'#48dbfb',t:'大学英语四六级(CET)',d:'CET-4/6，考研复试参考',u:'https://cet.neea.edu.cn/'},
+    {ic:'📜',bg:'#6c5ce7',t:'教师资格证',d:'非师范生可考',u:'http://ntce.neea.edu.cn/'},
+    {ic:'📜',bg:'#00cec9',t:'软考',d:'中级/高级IT认证',u:'https://www.ruankao.org.cn/'},
+    {ic:'🌐',bg:'#6c5ce7',t:'安徽专升本报名',d:'安徽省教育招生考试院',u:'https://www.ahzsks.cn/'},
+    {ic:'🌐',bg:'#6c5ce7',t:'研招网考研报名',d:'全国研究生统一考试',u:'https://yz.chsi.com.cn/'},
+    {ic:'🌐',bg:'#ffa502',t:'学信网',d:'学历查询/学籍验证',u:'https://www.chsi.com.cn/'},
   ],
 };
 
 function rRes(){
   const tab=S.rTab;let h='';
-  if(tab==='vid'){
-    RES.vid.forEach(v=>{
-      const lk=v.u?`onclick="window.open('${v.u}','_blank')"`:'';
-      h+=`<div class="res" ${lk}><div class="res-ic" style="background:${v.bg}18">${v.ic}</div><div class="res-i"><div class="res-t">${v.t}</div><div class="res-d">${v.d}</div><span class="res-tag">${v.tag}</span></div></div>`;
-    });
-  }else if(tab==='book'){
-    RES.book.forEach(b=>{
-      h+=`<div class="book"><div class="book-cv" style="background:linear-gradient(135deg,${b.bg},${b.bg}88)">${b.ic}</div><div class="book-i"><div class="book-t">${b.t}</div><div class="book-d">${b.d}</div><span class="res-tag">${b.tag}</span></div></div>`;
-    });
-  }else if(tab==='exam'){
-    RES.exam.forEach(e=>{
-      const lk=e.u?`onclick="window.open('${e.u}','_blank')"`:'';
-      h+=`<div class="res" ${lk}><div class="res-ic" style="background:${e.bg}18">${e.ic}</div><div class="res-i"><div class="res-t">${e.t}</div><div class="res-d">${e.d}</div><span class="res-tag">${e.tag}</span></div></div>`;
-    });
-  }else if(tab==='uni'){
-    RES.uni.forEach(u=>{
-      h+=`<div class="uni"><div class="uni-n">${u.n}</div><div class="uni-m">${u.lv} · ${u.loc}</div><div class="uni-s">📊 ${u.sc}</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">${(u.tags||[]).map(tg=>`<span style="font-size:.68em;padding:2px 7px;border-radius:8px;background:rgba(0,206,201,.12);color:var(--pg)">${tg}</span>`).join('')}</div><div class="uni-d">${u.desc}</div><div class="uni-lnk">${u.w?`<a href="${u.w}" target="_blank">🌐 学校官网</a>`:''}${u.g?`<a href="${u.g}" target="_blank">📖 研究生院</a>`:''}${u.e?`<a href="${u.e}" target="_blank">📝 报名入口</a>`:''}</div></div>`;
-    });
-  }else if(tab==='cert'){
-    RES.cert.forEach(c=>{
-      const lk=c.u?`onclick="window.open('${c.u}','_blank')"`:'';
-      h+=`<div class="res" ${lk}><div class="res-ic" style="background:${c.bg}18">${c.ic}</div><div class="res-i"><div class="res-t">${c.t}</div><div class="res-d">${c.d}</div>${c.u?`<a href="${c.u}" target="_blank" style="font-size:.78em;color:var(--pg);text-decoration:none;margin-top:3px;display:inline-block">🔗 官方网站</a>`:''}</div></div>`;
-    });
-  }
+  if(tab==='vid'){RES.vid.forEach(v=>{const lk=v.u?`onclick="window.open('${v.u}','_blank')"`:'';h+=`<div class="res" ${lk}><div class="res-ic" style="background:${v.bg}18">${v.ic}</div><div class="res-i"><div class="res-t">${v.t}</div><div class="res-d">${v.d}</div><span class="res-tag">${v.tag}</span></div></div>`})}
+  else if(tab==='book'){RES.book.forEach(b=>{h+=`<div class="book"><div class="book-cv" style="background:linear-gradient(135deg,${b.bg},${b.bg}88)">${b.ic}</div><div class="book-i"><div class="book-t">${b.t}</div><div class="book-d">${b.d}</div><span class="res-tag">${b.tag}</span></div></div>`})}
+  else if(tab==='uni'){RES.uni.forEach(u=>{h+=`<div class="uni"><div class="uni-n">${u.n}</div><div class="uni-m">${u.lv} · ${u.loc}</div><div class="uni-s">📊 ${u.sc}</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">${(u.tags||[]).map(tg=>`<span style="font-size:.68em;padding:2px 7px;border-radius:8px;background:rgba(0,206,201,.12);color:var(--pg)">${tg}</span>`).join('')}</div><div class="uni-d">${u.desc}</div><div class="uni-lnk">${u.w?`<a href="${u.w}" target="_blank">🌐 官网</a>`:''}${u.g?`<a href="${u.g}" target="_blank">📖 研究生院</a>`:''}${u.e?`<a href="${u.e}" target="_blank">📝 报名</a>`:''}</div></div>`})}
+  else if(tab==='cert'){RES.cert.forEach(c=>{const lk=c.u?`onclick="window.open('${c.u}','_blank')"`:'';h+=`<div class="res" ${lk}><div class="res-ic" style="background:${c.bg}18">${c.ic}</div><div class="res-i"><div class="res-t">${c.t}</div><div class="res-d">${c.d}</div>${c.u?`<a href="${c.u}" target="_blank" style="font-size:.78em;color:var(--pg);text-decoration:none;margin-top:3px;display:inline-block">🔗 官方网站</a>`:''}</div></div>`})}
   $('resC').innerHTML=h;
 }
-
-function resTab(t){
-  S.rTab=t;
-  const tabs=['vid','book','exam','uni','cert'];
-  document.querySelectorAll('#rTabs .itab').forEach((e,i)=>e.classList.toggle('on',i===tabs.indexOf(t)));
-  rRes();
-}
+function resTab(t){S.rTab=t;const tabs=['vid','book','uni','cert'];document.querySelectorAll('#rTabs .itab').forEach((e,i)=>e.classList.toggle('on',i===tabs.indexOf(t)));rRes()}
 
 // ---- Timer ----
 function toggleT(){
-  if(S.tRun){
-    clearInterval(S.tIv);S.tRun=false;
-    const mins=Math.floor(S.tSec/60);S.tMin+=mins;save();
-    $('tGo').textContent='继续学习';$('tGo').classList.remove('st');$('tGo').classList.add('go');
-    $('tStat').textContent=`本次学习 ${mins} 分钟`;rStats();
-    if(mins>=1)toast(`📚 学习了 ${mins} 分钟！`);
-  }else{
-    S.tRun=true;
-    S.tIv=setInterval(()=>{
-      S.tSec++;
-      const h=Math.floor(S.tSec/3600),m=Math.floor((S.tSec%3600)/60),s=S.tSec%60;
-      $('tDisp').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    },1000);
-    $('tGo').textContent='暂停';$('tGo').classList.add('st');$('tGo').classList.remove('go');
-    $('tStat').textContent='学习中...专注！';
-  }
+  if(S.tRun){clearInterval(S.tIv);S.tRun=false;const mins=Math.floor(S.tSec/60);S.tMin+=mins;save();$('tGo').textContent='继续学习';$('tGo').classList.remove('st');$('tGo').classList.add('go');$('tStat').textContent=`本次 ${mins} 分钟`;rStats();if(mins>=1)toast(`📚 学习了 ${mins} 分钟！`)}
+  else{S.tRun=true;S.tIv=setInterval(()=>{S.tSec++;const h=Math.floor(S.tSec/3600),m=Math.floor((S.tSec%3600)/60),s=S.tSec%60;$('tDisp').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`},1000);$('tGo').textContent='暂停';$('tGo').classList.add('st');$('tGo').classList.remove('go');$('tStat').textContent='学习中...专注！'}
 }
-function resetT(){
-  clearInterval(S.tIv);S.tRun=false;S.tSec=0;
-  $('tDisp').textContent='00:00:00';
-  $('tGo').textContent='开始学习';$('tGo').classList.remove('st');$('tGo').classList.add('go');
-  $('tStat').textContent='准备开始';
-}
+function resetT(){clearInterval(S.tIv);S.tRun=false;S.tSec=0;$('tDisp').textContent='00:00:00';$('tGo').textContent='开始学习';$('tGo').classList.remove('st');$('tGo').classList.add('go');$('tStat').textContent='准备开始'}
 
-// ---- Words ----
+// ---- Words with Spaced Repetition ----
 const WORDS=[
-  {e:'abandon',p:'/əˈbændən/',c:'v. 放弃；抛弃'},
-  {e:'abstract',p:'/ˈæbstrækt/',c:'adj. 抽象的 n. 摘要'},
-  {e:'academic',p:'/ˌækəˈdemɪk/',c:'adj. 学术的；学院的'},
-  {e:'accelerate',p:'/əkˈseləreɪt/',c:'v. 加速；促进'},
-  {e:'accomplish',p:'/əˈkʌmplɪʃ/',c:'v. 完成；实现'},
-  {e:'accurate',p:'/ˈækjərət/',c:'adj. 精确的；准确的'},
-  {e:'achieve',p:'/əˈtʃiːv/',c:'v. 达到；取得'},
-  {e:'acknowledge',p:'/əkˈnɒlɪdʒ/',c:'v. 承认；致谢'},
-  {e:'acquire',p:'/əˈkwaɪər/',c:'v. 获得；学到'},
-  {e:'adapt',p:'/əˈdæpt/',c:'v. 适应；改编'},
-  {e:'adequate',p:'/ˈædɪkwət/',c:'adj. 充足的；适当的'},
-  {e:'adjust',p:'/əˈdʒʌst/',c:'v. 调整；适应'},
-  {e:'administration',p:'/ədˌmɪnɪˈstreɪʃn/',c:'n. 管理；行政'},
-  {e:'advocate',p:'/ˈædvəkeɪt/',c:'v. 提倡 n. 倡导者'},
-  {e:'affection',p:'/əˈfekʃn/',c:'n. 喜爱；感情'},
-  {e:'aggressive',p:'/əˈɡresɪv/',c:'adj. 有进取心的；侵略的'},
-  {e:'allocate',p:'/ˈæləkeɪt/',c:'v. 分配；拨出'},
-  {e:'alternative',p:'/ɔːlˈtɜːnətɪv/',c:'n. 替代品 adj. 可选的'},
-  {e:'ambiguous',p:'/æmˈbɪɡjuəs/',c:'adj. 模糊的；有歧义的'},
-  {e:'ambitious',p:'/æmˈbɪʃəs/',c:'adj. 有雄心的；野心勃勃的'},
-  {e:'amend',p:'/əˈmend/',c:'v. 修正；改进'},
-  {e:'analyse',p:'/ˈænəlaɪz/',c:'v. 分析'},
-  {e:'anticipate',p:'/ænˈtɪsɪpeɪt/',c:'v. 预期；期望'},
-  {e:'apparent',p:'/əˈpærənt/',c:'adj. 明显的；表面上的'},
-  {e:'appreciate',p:'/əˈpriːʃieɪt/',c:'v. 欣赏；感激'},
-  {e:'approach',p:'/əˈprəʊtʃ/',c:'n. 方法 v. 接近'},
-  {e:'appropriate',p:'/əˈprəʊpriət/',c:'adj. 适当的；合适的'},
-  {e:'arbitrary',p:'/ˈɑːbɪtrəri/',c:'adj. 任意的；武断的'},
-  {e:'arise',p:'/əˈraɪz/',c:'v. 出现；产生'},
-  {e:'assign',p:'/əˈsaɪn/',c:'v. 分配；指派'},
-  {e:'associate',p:'/əˈsəʊʃieɪt/',c:'v. 联系 n. 同事'},
-  {e:'assume',p:'/əˈsjuːm/',c:'v. 假设；承担'},
-  {e:'assure',p:'/əˈʃʊər/',c:'v. 保证；确信'},
-  {e:'atmosphere',p:'/ˈætməsfɪər/',c:'n. 大气层；氛围'},
-  {e:'attach',p:'/əˈtætʃ/',c:'v. 附上；依恋'},
-  {e:'attain',p:'/əˈteɪn/',c:'v. 达到；获得'},
-  {e:'attempt',p:'/əˈtempt/',c:'v./n. 尝试；企图'},
-  {e:'attribute',p:'/əˈtrɪbjuːt/',c:'v. 归因于 n. 属性'},
-  {e:'authority',p:'/ɔːˈθɒrəti/',c:'n. 权威；当局'},
-  {e:'available',p:'/əˈveɪləbl/',c:'adj. 可用的；有空的'},
-  {e:'aware',p:'/əˈweər/',c:'adj. 意识到的'},
-  {e:'barrier',p:'/ˈbæriər/',c:'n. 障碍；屏障'},
-  {e:'benefit',p:'/ˈbenɪfɪt/',c:'n. 好处 v. 受益'},
-  {e:'bias',p:'/ˈbaɪəs/',c:'n. 偏见 v. 使有偏见'},
-  {e:'bond',p:'/bɒnd/',c:'n. 纽带；债券 v. 结合'},
-  {e:'boom',p:'/buːm/',c:'n./v. 繁荣；激增'},
-  {e:'boost',p:'/buːst/',c:'v./n. 促进；增加'},
-  {e:'burden',p:'/ˈbɜːdn/',c:'n. 负担 v. 使负重'},
-  {e:'capable',p:'/ˈkeɪpəbl/',c:'adj. 有能力的'},
-  {e:'capacity',p:'/kəˈpæsəti/',c:'n. 能力；容量'},
-  {e:'cease',p:'/siːs/',c:'v. 停止；终止'},
-  {e:'challenge',p:'/ˈtʃælɪndʒ/',c:'n./v. 挑战'},
-  {e:'circumstance',p:'/ˈsɜːkəmstəns/',c:'n. 环境；情况'},
-  {e:'collapse',p:'/kəˈlæps/',c:'v./n. 倒塌；崩溃'},
-  {e:'commit',p:'/kəˈmɪt/',c:'v. 承诺；犯（罪）'},
-  {e:'communicate',p:'/kəˈmjuːnɪkeɪt/',c:'v. 交流；传达'},
-  {e:'community',p:'/kəˈmjuːnəti/',c:'n. 社区；群体'},
-  {e:'compare',p:'/kəˈpeər/',c:'v. 比较；对比'},
-  {e:'compete',p:'/kəˈpiːt/',c:'v. 竞争；比赛'},
-  {e:'complex',p:'/ˈkɒmpleks/',c:'adj. 复杂的 n. 综合体'},
+  {e:'abandon',p:'/əˈbændən/',c:'v. 放弃；抛弃'},{e:'abstract',p:'/ˈæbstrækt/',c:'adj. 抽象的 n. 摘要'},
+  {e:'academic',p:'/ˌækəˈdemɪk/',c:'adj. 学术的'},{e:'accelerate',p:'/əkˈseləreɪt/',c:'v. 加速'},
+  {e:'accomplish',p:'/əˈkʌmplɪʃ/',c:'v. 完成'},{e:'accurate',p:'/ˈækjərət/',c:'adj. 精确的'},
+  {e:'achieve',p:'/əˈtʃiːv/',c:'v. 达到'},{e:'acknowledge',p:'/əkˈnɒlɪdʒ/',c:'v. 承认'},
+  {e:'acquire',p:'/əˈkwaɪər/',c:'v. 获得'},{e:'adapt',p:'/əˈdæpt/',c:'v. 适应'},
+  {e:'adequate',p:'/ˈædɪkwət/',c:'adj. 充足的'},{e:'adjust',p:'/əˈdʒʌst/',c:'v. 调整'},
+  {e:'advocate',p:'/ˈædvəkeɪt/',c:'v. 提倡'},{e:'aggressive',p:'/əˈɡresɪv/',c:'adj. 有进取心的'},
+  {e:'allocate',p:'/ˈæləkeɪt/',c:'v. 分配'},{e:'alternative',p:'/ɔːlˈtɜːnətɪv/',c:'n. 替代品'},
+  {e:'ambiguous',p:'/æmˈbɪɡjuəs/',c:'adj. 模糊的'},{e:'ambitious',p:'/æmˈbɪʃəs/',c:'adj. 有雄心的'},
+  {e:'analyse',p:'/ˈænəlaɪz/',c:'v. 分析'},{e:'anticipate',p:'/ænˈtɪsɪpeɪt/',c:'v. 预期'},
+  {e:'apparent',p:'/əˈpærənt/',c:'adj. 明显的'},{e:'appreciate',p:'/əˈpriːʃieɪt/',c:'v. 欣赏'},
+  {e:'approach',p:'/əˈprəʊtʃ/',c:'n. 方法 v. 接近'},{e:'appropriate',p:'/əˈprəʊpriət/',c:'adj. 适当的'},
+  {e:'arbitrary',p:'/ˈɑːbɪtrəri/',c:'adj. 任意的'},{e:'arise',p:'/əˈraɪz/',c:'v. 出现'},
+  {e:'assign',p:'/əˈsaɪn/',c:'v. 分配'},{e:'associate',p:'/əˈsəʊʃieɪt/',c:'v. 联系'},
+  {e:'assume',p:'/əˈsjuːm/',c:'v. 假设'},{e:'assure',p:'/əˈʃʊər/',c:'v. 保证'},
+  {e:'attach',p:'/əˈtætʃ/',c:'v. 附上'},{e:'attain',p:'/əˈteɪn/',c:'v. 达到'},
+  {e:'attempt',p:'/əˈtempt/',c:'v./n. 尝试'},{e:'attribute',p:'/əˈtrɪbjuːt/',c:'v. 归因于'},
+  {e:'authority',p:'/ɔːˈθɒrəti/',c:'n. 权威'},{e:'available',p:'/əˈveɪləbl/',c:'adj. 可用的'},
+  {e:'aware',p:'/əˈweər/',c:'adj. 意识到的'},{e:'barrier',p:'/ˈbæriər/',c:'n. 障碍'},
+  {e:'benefit',p:'/ˈbenɪfɪt/',c:'n. 好处 v. 受益'},{e:'bias',p:'/ˈbaɪəs/',c:'n. 偏见'},
+  {e:'boost',p:'/buːst/',c:'v./n. 促进'},{e:'burden',p:'/ˈbɜːdn/',c:'n. 负担'},
+  {e:'capable',p:'/ˈkeɪpəbl/',c:'adj. 有能力的'},{e:'capacity',p:'/kəˈpæsəti/',c:'n. 能力'},
+  {e:'challenge',p:'/ˈtʃælɪndʒ/',c:'n./v. 挑战'},{e:'collapse',p:'/kəˈlæps/',c:'v. 倒塌'},
+  {e:'commit',p:'/kəˈmɪt/',c:'v. 承诺'},{e:'communicate',p:'/kəˈmjuːnɪkeɪt/',c:'v. 交流'},
+  {e:'community',p:'/kəˈmjuːnəti/',c:'n. 社区'},{e:'compare',p:'/kəˈpeər/',c:'v. 比较'},
+  {e:'compete',p:'/kəˈpiːt/',c:'v. 竞争'},{e:'complex',p:'/ˈkɒmpleks/',c:'adj. 复杂的'},
+  {e:'compose',p:'/kəˈpəʊz/',c:'v. 组成；创作'},{e:'comprehend',p:'/ˌkɒmprɪˈhend/',c:'v. 理解'},
+  {e:'concentrate',p:'/ˈkɒnsntreɪt/',c:'v. 集中'},{e:'conclude',p:'/kənˈkluːd/',c:'v. 得出结论'},
+  {e:'conduct',p:'/kənˈdʌkt/',c:'v. 进行 n. 行为'},{e:'confine',p:'/kənˈfaɪn/',c:'v. 限制'},
+  {e:'confirm',p:'/kənˈfɜːm/',c:'v. 确认'},{e:'conflict',p:'/ˈkɒnflɪkt/',c:'n. 冲突'},
+  {e:'confront',p:'/kənˈfrʌnt/',c:'v. 面对'},{e:'conscious',p:'/ˈkɒnʃəs/',c:'adj. 有意识的'},
+  {e:'consent',p:'/kənˈsent/',c:'n./v. 同意'},{e:'consequence',p:'/ˈkɒnsɪkwəns/',c:'n. 后果'},
+  {e:'conservative',p:'/kənˈsɜːvətɪv/',c:'adj. 保守的'},{e:'considerable',p:'/kənˈsɪdərəbl/',c:'adj. 相当大的'},
+  {e:'consistent',p:'/kənˈsɪstənt/',c:'adj. 一致的'},{e:'constitute',p:'/ˈkɒnstɪtjuːt/',c:'v. 构成'},
+  {e:'construct',p:'/kənˈstrʌkt/',c:'v. 建造'},{e:'consult',p:'/kənˈsʌlt/',c:'v. 咨询'},
+  {e:'consume',p:'/kənˈsjuːm/',c:'v. 消费；消耗'},{e:'contemporary',p:'/kənˈtemprəri/',c:'adj. 当代的'},
+  {e:'contest',p:'/ˈkɒntest/',c:'n. 竞赛 v. 争论'},{e:'context',p:'/ˈkɒntekst/',c:'n. 上下文'},
+  {e:'contract',p:'/ˈkɒntrækt/',c:'n. 合同'},{e:'contradict',p:'/ˌkɒntrəˈdɪkt/',c:'v. 矛盾'},
+  {e:'contribute',p:'/kənˈtrɪbjuːt/',c:'v. 贡献'},{e:'controversial',p:'/ˌkɒntrəˈvɜːʃl/',c:'adj. 有争议的'},
+  {e:'convention',p:'/kənˈvenʃn/',c:'n. 惯例；大会'},{e:'convince',p:'/kənˈvɪns/',c:'v. 说服'},
+  {e:'cooperate',p:'/kəʊˈɒpəreɪt/',c:'v. 合作'},{e:'correspond',p:'/ˌkɒrɪˈspɒnd/',c:'v. 对应；通信'},
+  {e:'crucial',p:'/ˈkruːʃl/',c:'adj. 关键的'},{e:'cultivate',p:'/ˈkʌltɪveɪt/',c:'v. 培养'},
+  {e:'curiosity',p:'/ˌkjʊəriˈɒsəti/',c:'n. 好奇心'},{e:'decline',p:'/dɪˈklaɪn/',c:'v./n. 下降；拒绝'},
+  {e:'decorate',p:'/ˈdekəreɪt/',c:'v. 装饰'},{e:'decrease',p:'/dɪˈkriːs/',c:'v./n. 减少'},
+  {e:'define',p:'/dɪˈfaɪn/',c:'v. 定义'},{e:'deliberate',p:'/dɪˈlɪbərət/',c:'adj. 故意的'},
+  {e:'delicate',p:'/ˈdelɪkət/',c:'adj. 精致的；微妙的'},{e:'demonstrate',p:'/ˈdemənstreɪt/',c:'v. 证明；演示'},
+  {e:'deny',p:'/dɪˈnaɪ/',c:'v. 否认'},{e:'depend',p:'/dɪˈpend/',c:'v. 依赖'},
+  {e:'depress',p:'/dɪˈpres/',c:'v. 使沮丧'},{e:'derive',p:'/dɪˈraɪv/',c:'v. 源于'},
+  {e:'describe',p:'/dɪˈskraɪb/',c:'v. 描述'},{e:'deserve',p:'/dɪˈzɜːv/',c:'v. 值得'},
+  {e:'design',p:'/dɪˈzaɪn/',c:'v./n. 设计'},{e:'desire',p:'/dɪˈzaɪər/',c:'v./n. 渴望'},
+  {e:'desperate',p:'/ˈdespərət/',c:'adj. 绝望的'},{e:'despite',p:'/dɪˈspaɪt/',c:'prep. 尽管'},
+  {e:'destination',p:'/ˌdestɪˈneɪʃn/',c:'n. 目的地'},{e:'detect',p:'/dɪˈtekt/',c:'v. 检测'},
+  {e:'determine',p:'/dɪˈtɜːmɪn/',c:'v. 决定'},{e:'device',p:'/dɪˈvaɪs/',c:'n. 设备'},
+  {e:'devote',p:'/dɪˈvəʊt/',c:'v. 献身于'},{e:'dimension',p:'/daɪˈmenʃn/',c:'n. 维度'},
+  {e:'diminish',p:'/dɪˈmɪnɪʃ/',c:'v. 减少'},{e:'discipline',p:'/ˈdɪsəplɪn/',c:'n. 纪律；学科'},
+  {e:'disclose',p:'/dɪsˈkləʊz/',c:'v. 揭露'},{e:'discount',p:'/ˈdɪskaʊnt/',c:'n. 折扣'},
+  {e:'discriminate',p:'/dɪˈskrɪmɪneɪt/',c:'v. 歧视；区分'},{e:'dismiss',p:'/dɪsˈmɪs/',c:'v. 解雇；驳回'},
+  {e:'display',p:'/dɪˈspleɪ/',c:'v./n. 展示'},{e:'distinct',p:'/dɪˈstɪŋkt/',c:'adj. 不同的'},
+  {e:'distinguish',p:'/dɪˈstɪŋɡwɪʃ/',c:'v. 区分'},{e:'distribute',p:'/dɪˈstrɪbjuːt/',c:'v. 分配'},
+  {e:'diverse',p:'/daɪˈvɜːs/',c:'adj. 多样的'},{e:'document',p:'/ˈdɒkjumənt/',c:'n. 文件'},
+  {e:'domestic',p:'/dəˈmestɪk/',c:'adj. 国内的；家庭的'},{e:'dominate',p:'/ˈdɒmɪneɪt/',c:'v. 支配'},
+  {e:'dramatic',p:'/drəˈmætɪk/',c:'adj. 戏剧性的'},{e:'duration',p:'/djʊˈreɪʃn/',c:'n. 持续时间'},
 ];
 
+function getDueWords(){
+  const now=Date.now();
+  const due=[];
+  WORDS.forEach((w,i)=>{
+    const r=S.wordR[i];
+    if(!r)due.push(i); // never seen
+    else if(now>=r.next)due.push(i); // due for review
+  });
+  return due;
+}
+
 function rWords(){
-  const unseen=WORDS.filter((_,i)=>!S.words.includes(i));
-  if(!unseen.length){
-    $('wordA').innerHTML='<div class="empty"><div class="empty-ic">🎉</div><div class="empty-t">所有单词学完了！</div><button class="fb" style="margin-top:10px" onclick="S.words=[];S.wordIdx=0;save();rWords();rStats()">重置再来</button></div>';
-    return;
-  }
-  const w=unseen[0],idx=WORDS.indexOf(w);
+  const due=getDueWords();
+  if(!due.length){$('wordA').innerHTML='<div class="empty"><div class="empty-ic">🎉</div><div class="empty-t">今天没有需要复习的单词！</div></div>';return}
+  const idx=due[0],w=WORDS[idx];
   const prog=Math.round((S.words.length/WORDS.length)*100);
   $('wordA').innerHTML=`
     <div class="wprog"><span>已学 ${S.words.length}/${WORDS.length}</span><div class="pbar" style="flex:1"><div class="pfill" style="width:${prog}%"></div></div><span>${prog}%</span></div>
     <div class="wcard">
-      <div style="font-size:.75em;color:var(--tx3);margin-bottom:6px">还有 ${unseen.length} 个待学</div>
+      <div style="font-size:.75em;color:var(--tx3);margin-bottom:6px">待复习 ${due.length} 词</div>
       <div class="w-en">${w.e}</div><div class="w-ph">${w.p}</div><div class="w-cn">${w.c}</div>
       <div class="w-acts">
-        <button class="wbtn" onclick="skipW()">不认识 →</button>
-        <button class="wbtn know" onclick="knowW(${idx})">认识 ✓</button>
+        <button class="wbtn" onclick="wordRate(${idx},0)">忘了 😣</button>
+        <button class="wbtn" onclick="wordRate(${idx},1)">模糊 🤔</button>
+        <button class="wbtn know" onclick="wordRate(${idx},3)">记住 👍</button>
       </div>
     </div>`;
 }
-function knowW(i){if(!S.words.includes(i))S.words.push(i);save();rWords();rStats();toast('👍 记住了！')}
-function skipW(){rWords()}
+
+function wordRate(idx,quality){
+  // SM-2 spaced repetition algorithm
+  const r=S.wordR[idx]||{rep:0,ease:2.5,interval:0,next:0};
+  if(quality<3){
+    r.rep=0;r.interval=1; // reset
+  }else{
+    if(r.rep===0)r.interval=1;
+    else if(r.rep===1)r.interval=3;
+    else r.interval=Math.round(r.interval*r.ease);
+    r.rep++;
+  }
+  r.ease=Math.max(1.3,r.ease+(0.1-(3-quality)*(0.08+(3-quality)*0.02)));
+  r.next=Date.now()+r.interval*86400000;
+  S.wordR[idx]=r;
+  if(!S.words.includes(idx))S.words.push(idx);
+  save();rWords();rStats();
+  if(quality===3)toast('👍 记住了！'+r.interval+'天后复习');
+  else if(quality===1)toast('🤔 1天后复习');
+  else toast('😣 明天再看');
+}
 
 // ---- Custom Courses ----
 function toggleForm(){$('addForm').style.display=$('addForm').style.display==='none'?'block':'none'}
-
 function addCust(){
   const n=$('cName').value.trim();if(!n){toast('请输入课程名称');return}
   S.cust.push({n,goal:$('cGoal').value.trim(),time:$('cTime').value,res:$('cRes').value.trim(),prog:0,date:td()});
-  save();rCust();toast('✅ 课程已添加');
-  $('cName').value='';$('cGoal').value='';$('cRes').value='';
-  $('addForm').style.display='none';
+  save();rCust();toast('✅ 课程已添加');$('cName').value='';$('cGoal').value='';$('cRes').value='';$('addForm').style.display='none';
 }
-
 function rCust(){
   if(!S.cust.length){$('custC').innerHTML='<div class="empty" style="padding:16px"><div class="empty-ic">📚</div><div class="empty-t">还没有自定义课程</div></div>';return}
-  let h='';
-  S.cust.forEach((c,i)=>{
-    h+=`<div class="sub" style="border-left-color:var(--pg)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <div style="font-weight:700">${c.n}</div>
-        <button style="background:none;border:none;color:var(--pr);cursor:pointer;font-size:.82em" onclick="S.cust.splice(${i},1);save();rCust()">删除</button>
-      </div>
-      ${c.goal?`<div style="font-size:.82em;color:var(--tx2);margin-bottom:3px">🎯 ${c.goal}</div>`:''}
-      <div style="font-size:.82em;color:var(--tx3)">⏱ 每日 ${c.time} 分钟 · 添加于 ${c.date}</div>
-      ${c.res?`<a href="${c.res}" target="_blank" style="font-size:.82em;color:var(--pg);text-decoration:none">🔗 学习资源</a>`:''}
-      <div class="pbar" style="margin-top:8px"><div class="pfill" style="width:${c.prog}%"></div></div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <button class="fb" style="font-size:.78em;padding:6px;flex:1" onclick="S.cust[${i}].prog=Math.min(100,S.cust[${i}].prog+10);save();rCust()">+10%</button>
-        <button class="fb" style="font-size:.78em;padding:6px;flex:1;background:var(--grn)" onclick="S.cust[${i}].prog=100;save();rCust()">完成</button>
-      </div>
-    </div>`;
-  });
-  $('custC').innerHTML=h;
+  let h='';S.cust.forEach((c,i)=>{h+=`<div class="sub" style="border-left-color:var(--pg)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:700">${c.n}</div><button style="background:none;border:none;color:var(--pr);cursor:pointer;font-size:.82em" onclick="S.cust.splice(${i},1);save();rCust()">删除</button></div>${c.goal?`<div style="font-size:.82em;color:var(--tx2);margin-bottom:3px">🎯 ${c.goal}</div>`:''}<div style="font-size:.82em;color:var(--tx3)">⏱ 每日 ${c.time} 分钟</div>${c.res?`<a href="${c.res}" target="_blank" style="font-size:.82em;color:var(--pg);text-decoration:none">🔗 资源</a>`:''}<div class="pbar" style="margin-top:8px"><div class="pfill" style="width:${c.prog}%"></div></div><div style="display:flex;gap:6px;margin-top:8px"><button class="fb" style="font-size:.78em;padding:6px;flex:1" onclick="S.cust[${i}].prog=Math.min(100,S.cust[${i}].prog+10);save();rCust()">+10%</button><button class="fb" style="font-size:.78em;padding:6px;flex:1;background:var(--grn)" onclick="S.cust[${i}].prog=100;save();rCust()">完成</button></div></div>`});$('custC').innerHTML=h;
 }
 
 // ---- Profile ----
 function rProf(){
-  $('pName').value=S.prof.name;$('pStage').value=S.prof.stage;
-  $('pTgt').value=S.prof.target;$('pDaily').value=S.prof.daily;
-  const ci=Object.keys(S.cins).length;
-  const avg=ci>0?(S.tMin/ci).toFixed(0):0;
-  const cr=ci>0?Math.round((S.tDone/(ci*5))*100):0;
-  $('pStats').innerHTML=`<div class="pstats">
-    <div class="pstat"><div class="pstat-v">${ci}</div><div class="pstat-l">打卡天数</div></div>
-    <div class="pstat"><div class="pstat-v">${S.stk}</div><div class="pstat-l">连续天数</div></div>
-    <div class="pstat"><div class="pstat-v">${avg}</div><div class="pstat-l">日均(分)</div></div>
-    <div class="pstat"><div class="pstat-v">${cr}%</div><div class="pstat-l">完成率</div></div>
-  </div>
-  <div style="font-size:.82em;color:var(--tx2);margin-top:10px">📊 累计 ${(S.tMin/60).toFixed(1)}h · 📝 ${S.tDone}任务 · 📖 ${S.words.length}词</div>`;
-
+  $('pName').value=S.prof.name;$('pStage').value=S.prof.stage;$('pTgt').value=S.prof.target;$('pDaily').value=S.prof.daily;
+  const ci=Object.keys(S.cins).length,avg=ci>0?(S.tMin/ci).toFixed(0):0,cr=ci>0?Math.round((S.tDone/(ci*5))*100):0;
+  $('pStats').innerHTML=`<div class="pstats"><div class="pstat"><div class="pstat-v">${ci}</div><div class="pstat-l">打卡天数</div></div><div class="pstat"><div class="pstat-v">${S.stk}</div><div class="pstat-l">连续天数</div></div><div class="pstat"><div class="pstat-v">${avg}</div><div class="pstat-l">日均(分)</div></div><div class="pstat"><div class="pstat-v">${cr}%</div><div class="pstat-l">完成率</div></div></div><div style="font-size:.82em;color:var(--tx2);margin-top:10px">📊 累计 ${(S.tMin/60).toFixed(1)}h · 📝 ${S.tDone}任务 · 📖 ${S.words.length}词 · ❌ ${S.errs.length}错题</div>`;
   // AI Analysis
-  const tgt={njnu:'南京大学',sjtu:'上海交通大学',hfut:'合肥工业大学',whu:'武汉大学'}[S.prof.target]||'合肥工业大学';
-  const days=Object.keys(S.cins).length;
-  const avgMin=ci>0?(S.tMin/ci):0;
-  let advice='';
-  if(days===0)advice='你还没有开始打卡！点击首页"今日打卡"开始第一天学习。';
-  else if(avgMin<60)advice=`日均学习${avgMin.toFixed(0)}分钟，建议增加到180分钟以上。${tgt}需要你付出更多努力！`;
-  else if(avgMin<120)advice=`日均${avgMin.toFixed(0)}分钟，还不错！但距离${tgt}的目标还需要更系统的学习。建议每天至少3小时。`;
-  else if(avgMin<180)advice=`日均${avgMin.toFixed(0)}分钟，学习状态良好！保持节奏，${tgt}在向你招手！`;
-  else advice=`日均${avgMin.toFixed(0)}分钟，非常努力！${tgt}的目标很有希望，注意劳逸结合。`;
-
-  let weak='';
-  const taskKeys=Object.keys(S.ts).filter(k=>S.ts[k]);
-  if(taskKeys.length<5)weak='⚠️ 完成的任务较少，建议每天坚持完成所有任务。';
-
-  $('aiAnalysis').innerHTML=`<div style="font-size:.88em;line-height:1.6">
-    <div style="margin-bottom:8px">🎯 目标：<strong>${tgt}</strong></div>
-    <div style="margin-bottom:8px">${advice}</div>
-    ${weak?`<div style="color:var(--py);margin-bottom:8px">${weak}</div>`:''}
-    <div style="margin-top:12px;font-size:.82em;color:var(--tx3)">💡 AI分析基于你的学习数据自动生成，持续学习会让分析更精准</div>
-  </div>`;
+  const tgt={hfut:'合工大',njnu:'南大',sjtu:'上交',whu:'武大'}[S.prof.target]||'合工大';
+  const avgMin=ci>0?(S.tMin/ci):0;let adv='';
+  if(ci===0)adv='还没有开始学习！点击首页"今日打卡"开始。';
+  else if(avgMin<60)adv=`日均${avgMin.toFixed(0)}分钟，建议增加到180+。${tgt}需要更多努力！`;
+  else if(avgMin<120)adv=`日均${avgMin.toFixed(0)}分钟，还不错。但距离${tgt}还需更系统的学习。`;
+  else if(avgMin<180)adv=`日均${avgMin.toFixed(0)}分钟，状态良好！${tgt}在向你招手！`;
+  else adv=`日均${avgMin.toFixed(0)}分钟，非常努力！注意劳逸结合。`;
+  // Quiz analysis
+  const totalQ=Object.values(S.quizS).reduce((a,b)=>a+b,0);
+  let quizAdv='';
+  if(totalQ>0){
+    const weak=Object.entries(S.quizS).filter(([,v])=>v<3).map(([k])=>({math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[k]));
+    if(weak.length)quizAdv=`<div style="color:var(--py);margin-top:6px">⚠️ 做题薄弱项：${weak.join('、')}，建议加强练习</div>`;
+    else quizAdv=`<div style="color:var(--grn);margin-top:6px">✅ 各科做题表现不错！</div>`;
+  }
+  $('aiAnalysis').innerHTML=`<div style="font-size:.88em;line-height:1.6"><div style="margin-bottom:8px">🎯 目标：<strong>${tgt}</strong> · 距考试 <strong>${daysLeft()}</strong> 天</div><div>${adv}</div>${quizAdv}<div style="margin-top:12px;font-size:.82em;color:var(--tx3)">💡 基于你的学习数据自动分析</div></div>`;
 }
-
-function saveProf(){
-  S.prof.name=$('pName').value;S.prof.stage=$('pStage').value;
-  S.prof.target=$('pTgt').value;S.prof.daily=parseInt($('pDaily').value)||180;
-  save();rTasks();
-}
-
-function expData(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='studyforge_'+td()+'.json';a.click();toast('数据已导出');
-}
+function saveProf(){S.prof.name=$('pName').value;S.prof.stage=$('pStage').value;S.prof.target=$('pTgt').value;S.prof.daily=parseInt($('pDaily').value)||180;save();rTasks();rCountdown()}
+function expData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='studyforge_'+td()+'.json';a.click();toast('数据已导出')}
 
 // ---- AI Chat ----
-const AI_DATA={
-  '专升本':`安徽专升本考试全攻略 📋
-
-<b>考试科目：</b>
-1️⃣ 英语（150分）— 公共课
-2️⃣ 高等数学/大学语文（150分）— 公共课
-3️⃣ 计算机基础（150分）— 专业课
-总分450分
-
-<b>关键时间：</b>
-📅 报名：大三上学期（约3月）
-📅 考试：大三下学期（约4月）
-📅 成绩：考后1个月左右
-
-<b>报名网站：</b>
-🔗 安徽省教育招生考试院
-https://www.ahzsks.cn/
-
-<b>备考建议：</b>
-• 数学和英语是拉开差距的关键
-• 计算机基础靠背+理解，容易拿分
-• 每天至少3小时，坚持6个月以上
-• 刷真题比看书更高效`,
-
-  '考研':`考研全攻略 🎓
-
-<b>考试科目（工科/计算机）：</b>
-1️⃣ 政治（100分）
-2️⃣ 英语一/二（100分）
-3️⃣ 数学一/二（150分）
-4️⃣ 专业课（150分，各校自命题）
-总分500分
-
-<b>关键时间：</b>
-📅 大纲发布：9月
-📅 报名：10月（研招网）
-📅 现场确认：11月
-📅 初试：12月底
-📅 成绩：次年2月
-📅 复试：次年3-4月
-
-<b>报名网站：</b>
-🔗 研招网 https://yz.chsi.com.cn/
-🔗 学信网 https://www.chsi.com.cn/
-
-<b>你的目标院校分析：</b>
-🟢 合工大：复试线300-340，性价比最高
-🟡 武大：复试线340-370，中等难度
-🔴 南大：复试线350-380，极难
-🔴 上交：复试线360-390，最难
-
-💡 建议：合工大作为主目标，南大作为冲刺！`,
-
-  '数学':`数学学习路线（零基础→考研） 📐
-
-<b>第1步：高中回顾（2周）</b>
-• 函数、三角函数、数列、不等式
-• B站搜"高中数学总复习"
-• 每天2小时
-
-<b>第2步：高数入门（1-2月）</b>
-• 极限 → 导数 → 积分
-• 推荐：宋浩老师高数课（B站免费）
-• 每天1.5h视频 + 30min练习
-
-<b>第3步：系统学习（3-6月）</b>
-• 同济高数教材精读
-• 配合汤家凤/张宇视频
-• 做课后习题 + 660题
-
-<b>第4步：强化刷题（考研阶段）</b>
-• 张宇1000题/汤家凤1800题
-• 真题刷3遍
-
-<b>⚠️ 关键原则：</b>
-• 数学必须每天做题，不能只看视频
-• 错题本是提分利器
-• 先理解概念，再刷题`,
-
-  '英语':`英语学习路线（零基础→考研） 📗
-
-<b>词汇（每天坚持）：</b>
-• 专升本：30词/天 → 考研：50词/天
-• APP：墨墨背单词 / 不背单词
-• 方法：词根词缀 + 例句记忆
-• 早上背新词，晚上复习
-
-<b>语法（2个月搞定）：</b>
-• 推荐：刘晓艳语法课（B站免费）
-• 每天30分钟
-• 重点：时态、从句、非谓语
-
-<b>阅读（每天1篇）：</b>
-• 先精读，再泛读
-• 生词全部标记背诵
-• 分析长难句结构
-
-<b>写作（考前3个月）：</b>
-• 背诵15篇经典范文
-• 积累高级表达和句型
-• 练习模板化写作
-
-<b>💡 英语是长期积累，每天坚持比突击有效100倍！</b>`,
-
-  '计划':`根据你的情况，推荐三阶段计划 📅
-
-<b>📅 阶段一（5-7月）：基础重建</b>
-• 数学：高中回顾 + 高数入门
-• 英语：词汇 + 语法从零学
-• 每天3-4小时
-• 目标：能做基础题
-
-<b>📅 阶段二（7-12月）：系统学习</b>
-• 边实习边学习
-• 数学：高数系统课 + 做题
-• 英语：阅读 + 写作训练
-• 实习日2-3h，周末6-8h
-
-<b>📅 阶段三（次年1-3月）：冲刺</b>
-• 真题刷题 + 模拟考试
-• 查漏补缺 + 调整心态
-• 每天4-5小时
-
-<b>⚠️ 7月实习后时间变少：</b>
-• 早起1h背单词
-• 午休30min看视频
-• 晚上2h做题复习
-• 通勤听英语听力
-
-打开"计划"页面查看详细安排！`,
-
-  '合工大':`合肥工业大学考研信息 🏫
-
-<b>基本信息：</b>
-🏫 211 / 双一流
-📍 安徽合肥（离你最近！）
-💰 学费：8000元/年（学硕）
-
-<b>计算机学院复试线：</b>
-📊 约300-340分（近年）
-📊 报录比约3:1-5:1
-
-<b>✅ 优势：</b>
-• 211学历，性价比极高
-• 安徽省内，离家近
-• 竞争比南大/上交小很多
-• 就业认可度高（尤其长三角）
-• 奖学金覆盖率高
-
-<b>📝 考试科目：</b>
-• 政治 + 英语一 + 数学一 + 专业课（自命题）
-
-<b>🔗 重要链接：</b>
-• 研究生院：http://yjszs.hfut.edu.cn/
-• 学校官网：https://www.hfut.edu.cn/
-• 报名：https://yz.chsi.com.cn/
-
-<b>💡 建议：合工大是最现实的选择，建议作为主目标！</b>`,
-
-  '南大':`南京大学考研信息 🏫
-
-<b>基本信息：</b>
-🏫 985 / 211 / 双一流 / C9联盟
-📍 江苏南京
-💰 学费：8000元/年（学硕）
-
-<b>计算机学院复试线：</b>
-📊 约350-380分
-📊 报录比约8:1-12:1
-
-<b>⚠️ 难度分析：</b>
-• 竞争极其激烈
-• 数学需要130+
-• 英语需要70+
-• 专业课难度大
-• 需要非常扎实的基础
-
-<b>📝 考试科目：</b>
-• 政治 + 英语一 + 数学一 + 专业课（自命题）
-
-<b>🔗 重要链接：</b>
-• 研究生院：https://grawww.nju.edu.cn/
-• 学校官网：https://www.nju.edu.cn/
-• 报名：https://yz.chsi.com.cn/
-
-<b>💡 建议：南大作为冲刺目标，合工大作为保底！</b>`,
-
-  '武大':`武汉大学考研信息 🏫
-
-<b>基本信息：</b>
-🏫 985 / 211 / 双一流
-📍 湖北武汉
-💰 学费：8000元/年（学硕）
-
-<b>计算机学院复试线：</b>
-📊 约340-370分
-📊 报录比约6:1-10:1
-
-<b>✅ 特点：</b>
-• 综合性名校，计算机A级学科
-• 校园环境优美
-• 就业认可度高
-• 难度介于合工大和南大之间
-
-<b>🔗 重要链接：</b>
-• 研究生院：https://gs.whu.edu.cn/
-• 学校官网：https://www.whu.edu.cn/
-
-<b>💡 建议：武大是很好的选择，难度比南大低！</b>`,
-
-  '打卡':`每天打卡很重要！ ✅
-
-<b>打卡的好处：</b>
-✅ 建立学习习惯
-✅ 记录学习轨迹
-✅ 保持连续性激励
-✅ 可视化你的进步
-
-<b>打卡技巧：</b>
-• 固定时间打卡（如每天早上学习后）
-• 设置最低学习时长（30分钟）
-• 不要中断连续天数
-• 完不成最低目标也要学一点
-• 实在没时间，背10个单词也算打卡
-
-<b>⚠️ 记住：</b>
-坚持比强度更重要！
-每天学1小时 > 一周突击10小时
-
-点击首页"今日打卡"按钮开始！`,
-};
-
-function rSug(){
-  const sugs=['专升本','考研','数学','英语','计划','合工大','打卡'];
-  const el=$('aiSug');if(!el)return;
-  el.innerHTML=sugs.map(s=>`<span class="ai-chip" onclick="askChip('${s}')">${s}</span>`).join('');
-}
-
+function rSug(){}
 function askChip(q){$('chatIn').value=q;sendMsg()}
 
 function sendMsg(){
-  const inp=$('chatIn'),msg=inp.value.trim();if(!msg)return;
-  const box=$('chatMsgs');
-  box.innerHTML+=`<div class="cmsg me">${esc(msg)}</div>`;
-  inp.value='';
-
-  let resp='';
-  for(const[k,v]of Object.entries(AI_DATA)){
-    if(msg.includes(k)){resp=v;break}
-  }
-
-  if(!resp){
-    if(msg.includes('时间')||msg.includes('安排')||msg.includes('多久'))
-      resp=`时间规划建议 ⏰
-
-距离专升本还有约11个月，距离考研约3年。
-
-📅 现在最重要的是：
-1. 专升本：每天3-4小时
-2. 数学和英语是重点
-3. 7月实习后减少到2-3小时
-
-💡 坚持比强度更重要！每天学一点，比突击一周强。
-
-打开"计划"页面查看详细时间表！`;
-    else if(msg.includes('推荐')||msg.includes('资源')||msg.includes('视频'))
-      resp=`学习资源推荐 📚
-
-📹 数学视频：
-• 宋浩老师（零基础首选）
-• 汤家凤（基础班）
-• 张宇（进阶）
-
-📹 英语视频：
-• 刘晓艳（语法）
-• 朱伟（词汇）
-• 田静（长难句）
-
-📱 APP推荐：
-• 墨墨背单词
-• B站
-• 中国大学MOOC
-
-打开"资源"页面查看完整推荐和链接！`;
-    else if(msg.includes('难')||msg.includes('来得及')||msg.includes('基础差'))
-      resp=`零基础完全来得及！💪
-
-📋 策略：
-• 先专升本（11个月），再考研（2年）
-• 每天坚持3-4小时
-• 重点：数学+英语
-• 不要贪多，学扎实
-
-🎯 目标分解：
-• 5-7月：基础重建
-• 7-12月：系统学习
-• 1-3月：冲刺
-
-很多人都是零基础成功的，你已经迈出了第一步！`;
-    else if(msg.includes('实习'))
-      resp=`实习期间学习安排 💼
-
-⏰ 实习日（周一到周五）：
-• 早起1小时：背单词
-• 午休30分钟：看视频
-• 晚上2小时：做题+复习
-• 合计：约3.5小时
-
-📅 周末：
-• 全天学习6-8小时
-• 做真题+系统复习
-
-💡 技巧：
-• 通勤时间听英语
-• 碎片时间背单词
-• 晚上一定要学习`;
-    else
-      resp=`我是你的AI学习助手 🤖
-
-可以帮你解答：
-📚 专升本/考研考试信息
-📐 数学/英语学习方法
-🏫 目标院校录取信息
-📋 学习计划和时间安排
-📝 证书报名信息
-
-试试输入：专升本、考研、数学、英语、计划、合工大、南大、武大、打卡
-
-或点击下方快捷按钮！`;
-  }
-
-  setTimeout(()=>{
-    box.innerHTML+=`<div class="cmsg ai">${resp}</div>`;
-    rSug();box.scrollTop=box.scrollHeight;
-  },400);
+  const inp=$('chatIn'),msg=inp.value.trim();if(!msg)return
+  const box=$('chatMsgs');box.innerHTML+=`<div class="cmsg me">${esc(msg)}</div>`;inp.value='';
+  let r=genAI(msg);
+  setTimeout(()=>{box.innerHTML+=`<div class="cmsg ai">${r}</div>`;box.scrollTop=box.scrollHeight},300);
   box.scrollTop=box.scrollHeight;
 }
 
-function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+function genAI(q){
+  const dl=daysLeft(),stage=S.prof.stage;
+  const tgt={hfut:'合工大',njnu:'南大',sjtu:'上交',whu:'武大'}[S.prof.target]||'合工大';
+
+  if(q.includes('今天学什么')||q.includes('今日任务')){
+    const tasks=genTasks();
+    return `<b>今天的任务（还剩${dl}天）：</b><br><br>`+tasks.map((t,i)=>`${i+1}. ${t.text}（${t.tm}）`).join('<br>')+'<br><br>打开首页查看详细任务清单 ✅';
+  }
+  if(q.includes('还剩多少天')||q.includes('倒计时')){
+    return `<b>距离${stage==='zsb'?'专升本':'考研'}还有 <span style="color:var(--pk);font-size:1.2em">${dl}</span> 天</b><br><br>目标：${tgt}<br>考试日期：${examDate()}<br><br>${dl>180?'时间还算充裕，打好基础！':dl>60?'进入冲刺阶段，加油！':'最后关头，稳住心态！'}`;
+  }
+  if(q.includes('薄弱点')||q.includes('弱项')){
+    const weak=[];const qs=QUIZZES;
+    for(const[k,v]of Object.entries(S.quizS)){if(v<3)weak.push({math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[k])}
+    const errSubs=[...new Set(S.errs.map(e=>({math:'数学',eng:'英语',cs:'计算机',pol:'政治'}[e.sub])))];
+    let r='<b>📊 你的学习分析：</b><br><br>';
+    if(weak.length)r+=`⚠️ 做题得分低的科目：${weak.join('、')}<br>`;
+    if(errSubs.length)r+=`❌ 错题集中在：${errSubs.join('、')}<br>`;
+    if(!weak.length&&!errSubs.length)r+='✅ 目前数据不足以判断薄弱点，建议多做题。<br>';
+    r+='<br>💡 建议：打开📝题库多练习薄弱科目，错题会自动记录到错题本。';
+    return r;
+  }
+  if(q.includes('专升本')){
+    return `<b>安徽专升本全攻略 📋</b><br><br><b>考试科目：</b><br>1️⃣ 英语（150分）<br>2️⃣ 高数/语文（150分）<br>3️⃣ 计算机基础（150分）<br><br><b>时间线：</b><br>📅 报名：约3月<br>📅 考试：约4月<br><br><b>报名：</b><a href="https://www.ahzsks.cn/" target="_blank" style="color:var(--pg)">安徽考试院</a><br><br>距离考试还有 <b>${dl}</b> 天，${dl>180?'时间充裕，打好基础！':'进入冲刺！'}`;
+  }
+  if(q.includes('考研')){
+    return `<b>考研攻略 🎓</b><br><br><b>科目：</b>政治+英语+数学+专业课<br><b>报名：</b><a href="https://yz.chsi.com.cn/" target="_blank" style="color:var(--pg)">研招网</a><br><br><b>目标分析：</b><br>🟢 合工大：300-340分，性价比最高<br>🟡 武大：340-370分<br>🔴 南大：350-380分<br>🔴 上交：360-390分<br><br>建议合工大为主目标！`;
+  }
+  if(q.includes('数学')){
+    return `<b>数学学习路线 📐</b><br><br>1️⃣ 高中回顾（2周）<br>2️⃣ 高数入门：宋浩老师（B站免费）<br>3️⃣ 系统学习：同济教材+汤家凤/张宇<br>4️⃣ 刷题：1000题/660题<br><br><b>⚠️ 关键：每天必须做题，不能只看视频！</b><br><br>打开📝题库练习数学题！`;
+  }
+  if(q.includes('英语')){
+    return `<b>英语学习路线 📗</b><br><br>📖 词汇：每天30-50词（墨墨背单词）<br>📝 语法：刘晓艳语法课（B站）<br>📰 阅读：每天精读1篇<br>✍️ 写作：背15篇范文<br><br><b>💡 英语靠积累，每天坚持比突击有效100倍！</b>`;
+  }
+  if(q.includes('合工大')){
+    return `<b>合肥工业大学 🏫</b><br><br>211/双一流 · 安徽合肥<br>复试线：300-340分<br>报录比：约3:1-5:1<br><br>✅ 性价比极高，离家近<br>✅ 就业认可度高<br><br>🔗 <a href="http://yjszs.hfut.edu.cn/" target="_blank" style="color:var(--pg)">研究生院</a> · <a href="https://yz.chsi.com.cn/" target="_blank" style="color:var(--pg)">报名</a>`;
+  }
+  if(q.includes('打卡'))return '每天打卡很重要！✅<br><br>坚持比强度更重要。<br>每天学1小时 > 一周突击10小时。<br><br>点击首页"今日打卡"开始！';
+  if(q.includes('计划')||q.includes('规划'))return `<b>你的学习计划 📅</b><br><br>距离考试 <b>${dl}</b> 天<br><br>打开📋计划页面查看完整计划，任务会根据日期自动更新！<br><br>每天的任务在首页自动生成，不需要手动规划。`;
+  if(q.includes('实习'))return `<b>实习期间安排 💼</b><br><br>⏰ 早起1h：背单词<br>🕐 午休30min：看视频<br>🌙 晚上2h：做题复习<br>📱 通勤：听英语<br><br>周末全天6-8小时！`;
+
+  return `我是AI学习助手 🤖<br><br>你可以问我：<br>• <span class="ai-chip" onclick="askChip('专升本')">专升本</span> <span class="ai-chip" onclick="askChip('考研')">考研</span> <span class="ai-chip" onclick="askChip('数学怎么学')">数学</span> <span class="ai-chip" onclick="askChip('英语怎么学')">英语</span><br>• <span class="ai-chip" onclick="askChip('今天学什么')">今天学什么</span> <span class="ai-chip" onclick="askChip('还剩多少天')">还剩多少天</span> <span class="ai-chip" onclick="askChip('我的薄弱点')">薄弱点</span> <span class="ai-chip" onclick="askChip('合工大')">合工大</span><br>• <span class="ai-chip" onclick="askChip('打卡')">打卡</span> <span class="ai-chip" onclick="askChip('计划')">计划</span> <span class="ai-chip" onclick="askChip('实习')">实习</span>`;
+}
+
 function togChat(){$('chatBox').classList.toggle('open')}
 
 // ---- Home ----
-function rHome(){rQuote();rCin();rStats();rTasks();rCal()}
+function rHome(){rQuote();rCin();rStats();rTasks();rCal();rCountdown()}
 
 // ---- Init ----
-function init(){
-  rHome();rCust();
-  rSug();
-  // Auto-check daily
-  const last=localStorage.getItem('sf_lastRem');
-  if(last!==td())localStorage.setItem('sf_lastRem',td());
-}
-
-// Service Worker
+function init(){rHome();rCust()}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
-
 init();
 </script>
 </body>
